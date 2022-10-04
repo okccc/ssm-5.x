@@ -7,6 +7,7 @@
     <groupId>com.okccc</groupId>
     <artifactId>mybatis</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <!-- mybatis负责封装jdbc,是普通java工程打jar包,用到tomcat服务器的web工程打war包 -->
     <packaging>jar</packaging>
 
     <dependencies>
