@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 写crud的映射文件 -->
+<mapper namespace="com.okccc.mybatis.mapper.UserMapper">
+    <!--
+        两个一致
+        1.mapper接口的全类名和映射文件的namespace保持一致
+        2.mapper接口的方法名和映射文件的sql语句id保持一致
+    -->
+
+    <!-- void insertUser(User user); -->
+    <insert id="insertUser">
+        insert into t_user values(null,#{username},#{password},#{age},#{gender},#{email})
+    </insert>
+
+    <!-- void insertUserWithGeneratedKey(User user); -->
+    <insert id="insertUserWithGeneratedKey" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user values(null,#{username},#{password},#{age},#{gender},#{email})
+    </insert>
+</mapper>
