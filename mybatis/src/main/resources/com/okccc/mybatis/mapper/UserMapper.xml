@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 写crud的映射文件 -->
+<!-- 映射文件负责写crud -->
 <mapper namespace="com.okccc.mybatis.mapper.UserMapper">
     <!--
         两个一致
@@ -16,8 +16,81 @@
         insert into t_user values(null,#{username},#{password},#{age},#{gender},#{email})
     </insert>
 
+    <!--
+       useGeneratedKeys表示当前添加功能使用自增主键
+       keyProperty自增主键对应的实体类属性名,通常是id
+    -->
     <!-- void insertUserWithGeneratedKey(User user); -->
     <insert id="insertUserWithGeneratedKey" useGeneratedKeys="true" keyProperty="id">
         insert into t_user values(null,#{username},#{password},#{age},#{gender},#{email})
     </insert>
+
+    <!-- void updateUser(@Param("username") String username, @Param("password") String password); -->
+    <update id="updateUser">
+        update t_user set password = #{password} where username = #{username}
+    </update>
+
+    <!-- void deleteUserById(); -->
+    <delete id="deleteUserById">
+        delete from t_user where id = #{id}
+    </delete>
+
+    <!-- void deleteUserByIds(@Param("ids") String ids); -->
+    <delete id="deleteUserByIds">
+        delete from t_user where id in (${ids})
+    </delete>
+
+    <!--
+        resultType设置结果类型,即查询数据要转换成的java类型
+        resultMap自定义映射,处理一对多或多对一的映射关系
+    -->
+    <!-- User getUserById(); -->
+    <select id="getUserById" resultType="User">
+        select * from t_user where id = #{id}
+    </select>
+
+    <!-- List<User> getAllUser(); -->
+    <select id="getAllUser" resultType="User">
+        select * from t_user
+    </select>
+
+    <!-- User checkLogin(@Param("username") String username, @Param("password") String password); -->
+    <select id="checkLogin" resultType="User">
+        select * from t_user where username = '${username}' and password = '${password}'
+    </select>
+
+    <!--
+        MyBatis为java常用类型设置了类型别名
+        Integer: int、Integer | int: _int、_integer | Map: map | String: string
+    -->
+    <!-- Integer getCount(); -->
+    <select id="getCount" resultType="int">
+        select count(*) from t_user
+    </select>
+
+    <!-- Map<String, Object> getUserByIdToMap(@Param("id") Integer id); -->
+    <select id="getUserByIdToMap" resultType="map">
+        select * from t_user where id = #{id}
+    </select>
+
+    <!-- List<Map<String, Object>> getAllUserToMap01(); -->
+    <select id="getAllUserToMap01" resultType="map">
+        select * from t_user
+    </select>
+
+    <!-- Map<String, Object> getAllUserToMap02(); -->
+    <select id="getAllUserToMap02" resultType="map">
+        select * from t_user
+    </select>
+
+    <!-- List<User> getUserByLike(@Param("str") String str); -->
+    <select id="getUserByLike" resultType="User">
+        <!--        select * from t_user where username like '%${str}%'-->
+        select * from t_user where username like "%"#{str}"%"
+    </select>
+
+    <!-- List<User> selectByTableName(@Param("tableName") String tableName); -->
+    <select id="selectByTableName" resultType="User">
+        select * from ${tableName}
+    </select>
 </mapper>
