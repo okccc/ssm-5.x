@@ -1,6 +1,8 @@
 package com.okccc.mybatis.test;
 
+import com.okccc.mybatis.mapper.EmpMapper;
 import com.okccc.mybatis.mapper.UserMapper;
+import com.okccc.mybatis.pojo.Emp;
 import com.okccc.mybatis.pojo.User;
 import com.okccc.mybatis.utils.SqlSessionUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -79,5 +81,14 @@ public class MybatisTest {
         // 动态传入表名查询
         List<User> list03 = userMapper.selectByTableName("t_user");
         System.out.println(list03);
+    }
+
+    @Test
+    public void testGetEmpByEmpId() {
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+        EmpMapper empMapper = sqlSession.getMapper(EmpMapper.class);
+        // 级联处理
+        Emp emp01 = empMapper.getEmpByEmpId(3);
+        System.out.println(emp01);
     }
 }

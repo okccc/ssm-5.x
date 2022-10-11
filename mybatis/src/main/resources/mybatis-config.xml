@@ -12,6 +12,12 @@
     <!-- 引入properties文件,然后就可以在当前文件使用${key}获取value -->
     <properties resource="jdbc.properties"/>
 
+    <!-- 全局配置 -->
+    <settings>
+        <!-- 将下划线映射成驼峰规则 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
     <!-- 设置类型别名 -->
     <typeAliases>
         <!--        <typeAlias type="com.okccc.mybatis.pojo.User" alias="aaa"/>-->
