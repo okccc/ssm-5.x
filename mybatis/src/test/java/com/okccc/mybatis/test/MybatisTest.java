@@ -87,7 +87,7 @@ public class MybatisTest {
     public void testGetEmpByEmpId() {
         SqlSession sqlSession = SqlSessionUtil.getSqlSession();
         EmpMapper empMapper = sqlSession.getMapper(EmpMapper.class);
-        // 级联处理
+        // association
         Emp emp01 = empMapper.getEmpByEmpId(3);
         System.out.println(emp01);
     }
