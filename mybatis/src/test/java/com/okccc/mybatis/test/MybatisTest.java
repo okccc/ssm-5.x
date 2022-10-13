@@ -1,7 +1,9 @@
 package com.okccc.mybatis.test;
 
+import com.okccc.mybatis.mapper.DeptMapper;
 import com.okccc.mybatis.mapper.EmpMapper;
 import com.okccc.mybatis.mapper.UserMapper;
+import com.okccc.mybatis.pojo.Dept;
 import com.okccc.mybatis.pojo.Emp;
 import com.okccc.mybatis.pojo.User;
 import com.okccc.mybatis.utils.SqlSessionUtil;
@@ -90,5 +92,14 @@ public class MybatisTest {
         // association
         Emp emp01 = empMapper.getEmpByEmpId(3);
         System.out.println(emp01);
+    }
+
+    @Test
+    public void testGetDeptByDeptId() {
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+        DeptMapper deptMapper = sqlSession.getMapper(DeptMapper.class);
+        // collection
+        Dept dept01 = deptMapper.getDeptByDeptId(1);
+        System.out.println(dept01);
     }
 }

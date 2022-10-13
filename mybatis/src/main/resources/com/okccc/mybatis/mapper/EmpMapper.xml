@@ -11,6 +11,7 @@
         id: 处理主键字段和属性的映射关系
         result: 处理普通字段和属性的映射关系
         association: 处理多对一的映射关系,即实体类类型的属性
+        collection: 处理一对多的映射关系,即集合类型的属性
     -->
 
     <resultMap id="empResultMap" type="Emp">
