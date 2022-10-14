@@ -92,6 +92,10 @@ public class MybatisTest {
         // association
         Emp emp01 = empMapper.getEmpByEmpId(3);
         System.out.println(emp01);
+        // 分步查询
+        Emp emp02 = empMapper.getEmpByEmpIdWithStepOne(3);
+        System.out.println(emp02.getEmpName());
+        System.out.println(emp02);
     }
 
     @Test
@@ -101,5 +105,9 @@ public class MybatisTest {
         // collection
         Dept dept01 = deptMapper.getDeptByDeptId(1);
         System.out.println(dept01);
+        // 分步查询
+        Dept dept02 = deptMapper.getDeptByDeptIdWithStepOne(1);
+        System.out.println(dept02.getDeptName());
+        System.out.println(dept02);
     }
 }

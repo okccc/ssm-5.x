@@ -20,4 +20,21 @@
     <select id="getDeptByDeptId" resultMap="deptResultMap">
         select * from t_dept left join t_emp on t_dept.dept_id = t_emp.dept_id where t_dept.dept_id = #{deptId}
     </select>
+
+    <resultMap id="deptResultMapByStep" type="Dept">
+        <id column="dept_id" property="deptId"/>
+        <result column="dept_name" property="deptName"/>
+        <!-- 方式二：分步查询(推荐) -->
+        <collection property="emps" column="dept_id" fetchType="lazy"
+                    select="com.okccc.mybatis.mapper.EmpMapper.getDeptByDeptIdWithStepTwo"/>
+    </resultMap>
+    <!-- Dept getDeptByDeptIdWithStepOne(@Param("deptId") Integer deptId); -->
+    <select id="getDeptByDeptIdWithStepOne" resultMap="deptResultMapByStep">
+        select * from t_dept where dept_id = #{deptId}
+    </select>
+
+    <!-- Dept getEmpByEmpIdWithStepTwo(@Param("deptId") Integer deptId); -->
+    <select id="getEmpByEmpIdWithStepTwo" resultType="Dept">
+        select * from t_dept where dept_id = #{deptId}
+    </select>
 </mapper>

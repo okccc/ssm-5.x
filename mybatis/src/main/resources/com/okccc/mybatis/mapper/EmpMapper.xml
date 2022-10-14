@@ -12,6 +12,7 @@
         result: 处理普通字段和属性的映射关系
         association: 处理多对一的映射关系,即实体类类型的属性
         collection: 处理一对多的映射关系,即集合类型的属性
+        一对多和多对一都可以使用分步查询,可以延迟加载,减少内存消耗
     -->
 
     <resultMap id="empResultMap" type="Emp">
@@ -31,5 +32,30 @@
     <!-- Emp getEmpByEmpId(@Param("empId") Integer empId); -->
     <select id="getEmpByEmpId" resultMap="empResultMap">
         select * from t_emp left join t_dept on t_emp.dept_id = t_dept.dept_id where t_emp.emp_id = #{empId}
+    </select>
+
+    <resultMap id="empResultMapWithStep" type="Emp">
+        <id column="emp_id" property="empId"/>
+        <result column="emp_name" property="empName"/>
+        <result column="age" property="age"/>
+        <result column="gender" property="gender"/>
+        <!--
+            方式三：分步查询(推荐)
+            property：需要处理映射关系的属性名
+            column：当前查询stepOne的某个字段名作为分步查询stepTwo的查询条件
+            select：分步查询sql的唯一标识,即namespace.sqlId,也就是mapper接口.方法名
+            fetchType：核心配置文件全局配置了自动延迟加载,映射文件可以手动设置开关 eager(立即加载)/lazy(延迟加载)
+        -->
+        <association property="dept" column="dept_id" fetchType="lazy"
+                     select="com.okccc.mybatis.mapper.DeptMapper.getEmpByEmpIdWithStepTwo"/>
+    </resultMap>
+    <!-- Emp getEmpByEmpIdWithStepOne(@Param("empId") Integer empId); -->
+    <select id="getEmpByEmpIdWithStepOne" resultMap="empResultMapWithStep">
+        select * from t_emp where emp_id = #{empId}
+    </select>
+
+    <!-- List<Emp> getDeptByDeptIdWithStepTwo(@Param("deptId") Integer deptId); -->
+    <select id="getDeptByDeptIdWithStepTwo" resultType="Emp">
+        select * from t_emp where dept_id = #{deptId}
     </select>
 </mapper>
