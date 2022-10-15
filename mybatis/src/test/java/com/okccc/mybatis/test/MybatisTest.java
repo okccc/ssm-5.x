@@ -10,6 +10,7 @@ import com.okccc.mybatis.utils.SqlSessionUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -109,5 +110,23 @@ public class MybatisTest {
         Dept dept02 = deptMapper.getDeptByDeptIdWithStepOne(1);
         System.out.println(dept02.getDeptName());
         System.out.println(dept02);
+    }
+
+    @Test
+    public void testDynamicSql() {
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+        EmpMapper empMapper = sqlSession.getMapper(EmpMapper.class);
+        // 使用if、where、trim、choose等标签动态拼接sql
+        Emp emp = new Emp(null, "fly", 20, "");
+        List<Emp> list = empMapper.getEmpByCondition(emp);
+        list.forEach(System.out::println);
+        // 批量添加
+        Emp emp1 = new Emp(null, "ted1", 19, "男", null);
+        Emp emp2 = new Emp(null, "ted2", 19, "男", null);
+        Emp emp3 = new Emp(null, "ted3", 19, "男", null);
+        empMapper.insertBatch(Arrays.asList(emp1,emp2,emp3));
+        // 批量删除
+        Integer[] empIds = {33, 34, 35};
+        empMapper.deleteBatch(empIds);
     }
 }

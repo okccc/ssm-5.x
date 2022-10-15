@@ -58,4 +58,112 @@
     <select id="getDeptByDeptIdWithStepTwo" resultType="Emp">
         select * from t_emp where dept_id = #{deptId}
     </select>
+
+    <!--
+        mybatis动态拼接sql
+        if标签：条件成立就拼接到sql中
+        where标签：自动处理where和and关键字
+        trim标签：通过prefix和suffix添加前后缀,prefixOverrides和suffixOverrides去掉前后缀
+        choose标签：when和otherwise相当于java的if...else if...else,其中when至少一个otherwise最多一个
+        sql片段：可以记录一段常用sql,在需要的地方通过include标签引用
+        <sql id="empColumns">
+            emp_id,emp_name,age,gender,dept_id
+        </sql>
+        <include refid="empColumns"></include>
+    -->
+
+    <!-- sql片段 -->
+    <sql id="empColumns">
+        emp_id,emp_name,age,gender,dept_id
+    </sql>
+
+    <!-- List<Emp> getEmpByCondition(Emp emp); -->
+    <select id="getEmpByCondition01" resultType="Emp">
+        select * from t_emp where 1=1
+        <if test="empName != null and empName != ''">
+            and emp_name = #{empName}
+        </if>
+        <if test="age != null and age != ''">
+            and age = #{age}
+        </if>
+        <if test="gender != null and gender != ''">
+            and gender = #{gender}
+        </if>
+    </select>
+    <select id="getEmpByCondition" resultType="Emp">
+        select <include refid="empColumns"/> from t_emp
+        <where>
+            <if test="empName != null and empName != ''">
+                and emp_name = #{empName}
+            </if>
+            <if test="age != null and age != ''">
+                and age = #{age}
+            </if>
+            <if test="gender != null and gender != ''">
+                and gender = #{gender}
+            </if>
+        </where>
+    </select>
+    <select id="getEmpByCondition02" resultType="Emp">
+        select * from t_emp
+        <trim prefix="where" suffixOverrides="and">
+            <if test="empName != null and empName != ''">
+                emp_name = #{empName} and
+            </if>
+            <if test="age != null and age != ''">
+                age = #{age} and
+            </if>
+            <if test="gender != null and gender != ''">
+                gender = #{gender}
+            </if>
+        </trim>
+    </select>
+    <select id="getEmpByCondition03" resultType="Emp">
+        select * from t_emp
+        <where>
+            <choose>
+                <when test="empName != null and empName != ''">
+                    emp_name = #{empName}
+                </when>
+                <when test="age != null and age != ''">
+                    age = #{age}
+                </when>
+                <when test="gender != null and gender != ''">
+                    gender = #{gender}
+                </when>
+            </choose>
+        </where>
+    </select>
+
+    <!--
+        foreach标签(常用)
+        collection：循环的数组或集合
+        item：数组或集合中的每一项数据
+        separator：循环数据之间的分隔符
+        open/close：循环数据以什么开始/结束
+    -->
+    <!-- void insertBatch(@Param("emps") List<Emp> emps); -->
+    <insert id="insertBatch">
+        <!-- insert into t_emp values (null,?,?,?,null) , (null,?,?,?,null) , (null,?,?,?,null) -->
+        insert into t_emp values
+        <foreach collection="emps" item="emp" separator=",">
+            (null,#{emp.empName},#{emp.age},#{emp.gender},null)
+        </foreach>
+    </insert>
+
+    <!-- void deleteBatch(@Param("empIds") Integer[] empIds); -->
+    <delete id="deleteBatch">
+        <!-- 方式一：delete from t_emp where emp_id in ( ? , ? , ? ) -->
+        delete from t_emp where emp_id in
+        <foreach collection="empIds" item="empId" separator="," open="(" close=")">
+            #{empId}
+        </foreach>
+    </delete>
+    <delete id="deleteBatch01">
+        <!-- 方式二：delete from t_emp where emp_id = ? or emp_id = ? or emp_id = ? -->
+        delete from t_emp where
+        <foreach collection="empIds" item="empId" separator="or">
+            emp_id = #{empId}
+        </foreach>
+    </delete>
 </mapper>

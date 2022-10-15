@@ -26,4 +26,20 @@ public interface EmpMapper {
      * 分步查询部门以及对应员工的第二步
      */
     List<Emp> getDeptByDeptIdWithStepTwo(@Param("deptId") Integer deptId);
+
+    /**
+     * 根据条件查询员工信息
+     */
+    List<Emp> getEmpByCondition(Emp emp);
+
+    /**
+     * 批量添加
+     */
+    void insertBatch(@Param("emps") List<Emp> emps);
+
+    /**
+     * 批量删除
+     */
+    void deleteBatch(@Param("empIds") Integer[] empIds);
+//    void deleteBatch(@Param("empIds") List<Integer> empIds);
 }
