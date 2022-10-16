@@ -18,6 +18,8 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <!-- 开启延迟加载,需要啥就查啥而不是一次性全部查出来,可以对比开启前后DEBUG信息执行的sql条数 -->
         <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 开启缓存,可以对比缓存前后DEBUG信息执行的sql次数 -->
+        <setting name="cacheEnabled" value="true"/>
     </settings>
 
     <!-- 设置类型别名 -->

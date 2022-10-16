@@ -11,6 +11,11 @@
         2.mapper接口的方法名和映射文件的sql语句id保持一致
     -->
 
+    <!-- mybatis自带的二级缓存 -->
+<!--    <cache/>-->
+    <!-- mybatis整合ehcache的二级缓存(了解),后面ssm会有专门的缓存框架 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
     <!-- void insertUser(User user); -->
     <insert id="insertUser">
         insert into t_user values(null,#{username},#{password},#{age},#{gender},#{email})
