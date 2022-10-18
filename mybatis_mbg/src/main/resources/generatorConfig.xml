@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--
+        正向工程：先创建Java实体类,框架根据实体类生成数据库表,Hibernate就支持正向工程
+        逆向工程：先创建数据库表,框架根据数据库表反向生成Java实体类、Mapper接口、Mapper映射文件
+        targetRuntime: 逆向工程版本,MyBatis3Simple生成基本的CRUD(简洁版),MyBatis3生成带条件的CRUD(豪华版)
+        逆向工程只能操作单表,多表关联还是得手动写Mapper接口和Mapper映射文件
+        步骤：
+        1.pom.xml添加依赖和插件
+        2.创建mybatis核心配置文件mybatis-config.xml、jdbc.properties、log4j.xml
+        3.创建逆向工程配置文件generatorConfig.xml
+        4.双击maven插件mybatis-generator:generate
+     -->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!-- 数据库连接信息 -->
+        <!-- 报错：Cannot obtain primary key information from the database, generated objects may be incomplete -->
+        <!-- 解决：在jdbc连接信息的url后面添加nullCatalogMeansCurrent=true,不然Mapper接口会缺少通过主键执行的增删改查方法 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/ssm?nullCatalogMeansCurrent=true"
+                        userId="root"
+                        password="root@123">
+        </jdbcConnection>
+        <!-- javaBean的生成策略 -->
+        <javaModelGenerator targetPackage="com.okccc.mybatis.pojo" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- SQL映射文件的生成策略 -->
+        <sqlMapGenerator targetPackage="com/okccc/mybatis/mapper" targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!-- Mapper接口的生成策略 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.okccc.mybatis.mapper"  targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        <!-- 逆向分析的表 -->
+        <!-- 如果tableName设置为*,表示对应所有表,此时不用写domainObjectName -->
+        <table tableName="t_emp" domainObjectName="Emp"/>
+        <table tableName="t_dept" domainObjectName="Dept"/>
+    </context>
+</generatorConfiguration>
