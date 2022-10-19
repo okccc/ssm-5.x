@@ -26,6 +26,12 @@
         <package name="com.okccc.mybatis.pojo"/>
     </typeAliases>
 
+    <!-- 配置插件 -->
+    <plugins>
+        <!-- 分页插件 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
+
     <!--
         environments：配置数据库连接,default指定默认环境
         environment：具体数据库环境,prod|dev|test
