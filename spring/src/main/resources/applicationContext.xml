@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        IOC(Inverse Of Control)：控制反转,把创建对象和对象之间相互调用的过程都交给Spring管理,降低耦合度
+        IOC底层原理: 工厂模式 + xml解析 + 反射,相当于工厂模式的升级版
+        IOC思想基于IOC容器完成,IOC容器就是对象工厂,Spring提供了两种实现方式
+        BeanFactory：Spring内部使用接口,不提供给开发人员使用,加载配置文件时不会创建对象,获取对象时才会创建对象
+        ApplicationContext：BeanFactory接口的子接口,提供更多功能给开发人员使用,加载配置文件时就会创建对象,耗时操作在项目启动时就完成
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Demo demo = ioc.getBean(Demo.class);
+        反射是调用类的无参构造创建对象,所以bean只能是类类型不能是接口类型
+        Class<?> clazz = Class.forName("com.okccc.spring.pojo.Demo");
+        Object o = clazz.newInstance();
+    -->
+    <bean id="demo" class="com.okccc.spring.pojo.Demo"/>
+</beans>
