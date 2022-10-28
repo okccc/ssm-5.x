@@ -1,6 +1,7 @@
 package com.okccc.spring.test;
 
 import com.okccc.spring.pojo.Demo;
+import com.okccc.spring.pojo.Emp;
 import com.okccc.spring.pojo.Person;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -39,5 +40,13 @@ public class SpringTest {
         Class<?> clazz = Class.forName("com.okccc.spring.pojo.Demo");
         Object o = clazz.newInstance();
         System.out.println(o);
+    }
+
+    @Test
+    public void testDI() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
+        // 依赖注入之setter注入
+        Emp emp01 = ioc.getBean("emp01", Emp.class);
+        System.out.println(emp01);  // Student{id=1, name='grubby', age=19, sex='男'}
     }
 }

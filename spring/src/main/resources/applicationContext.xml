@@ -14,6 +14,23 @@
         反射是调用类的无参构造创建对象,所以bean只能是类类型不能是接口类型
         Class<?> clazz = Class.forName("com.okccc.spring.pojo.Demo");
         Object o = clazz.newInstance();
+        DI(Dependency Injection)：依赖注入,IOC思想的一种具体实现,组件以预先定义好的方式接受容器的资源注入,比如setter方法和有参构造
     -->
     <bean id="demo" class="com.okccc.spring.pojo.Demo"/>
+
+    <!-- 配置bean对象并给属性赋值(常用) -->
+    <bean id="emp01" class="com.okccc.spring.pojo.Emp">
+        <!-- 点击属性名就会发现是通过Setter方法给对象赋值 -->
+        <property name="empId" value="1"/>
+        <!-- 特殊符号&lt;&gt;或者直接使用CDATA区表示 -->
+        <!--        <property name="name" value="a &lt; b"/>-->
+        <property name="empName">
+            <value><![CDATA[a < b]]></value>
+        </property>
+        <property name="age" value="19"/>
+        <!-- null值是通过标签表示而不是字符串 -->
+        <property name="sex">
+            <null/>
+        </property>
+    </bean>
 </beans>
