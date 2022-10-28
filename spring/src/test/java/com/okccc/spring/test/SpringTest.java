@@ -48,5 +48,9 @@ public class SpringTest {
         // 依赖注入之setter注入
         Emp emp01 = ioc.getBean("emp01", Emp.class);
         System.out.println(emp01);  // Student{id=1, name='grubby', age=19, sex='男'}
+
+        // 依赖注入之构造器注入
+        Emp emp02 = ioc.getBean("emp02", Emp.class);
+        System.out.println(emp02);  // Student{id=2, name='moon', age=20, sex='女'}
     }
 }

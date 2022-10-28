@@ -33,4 +33,12 @@
             <null/>
         </property>
     </bean>
+
+    <!-- 配置bean对象并通过构造器赋值 -->
+    <bean id="emp02" class="com.okccc.spring.pojo.Emp">
+        <constructor-arg name="id" value="2"/>
+        <constructor-arg name="name" value="moon"/>
+        <constructor-arg name="age" value="20"/>
+        <constructor-arg name="sex" value="女"/>
+    </bean>
 </beans>
