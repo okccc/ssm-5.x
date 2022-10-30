@@ -42,6 +42,14 @@
                 <property name="deptName" value="销售部"/>
             </bean>
         </property>
+        <!-- 为数组类型属性赋值 -->
+        <property name="hobbies">
+            <array>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+            </array>
+        </property>
     </bean>
 
     <bean id="dept01" class="com.okccc.spring.pojo.Dept">
