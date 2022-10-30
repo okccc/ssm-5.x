@@ -32,13 +32,20 @@
         <property name="sex">
             <null/>
         </property>
+        <!-- 为类类型属性赋值 -->
+        <!-- 方式一：引用外部bean -->
+        <!--        <property name="dept" ref="dept01"/>-->
+        <!-- 方式二：添加内部bean,内部bean只能用于属性赋值,无法在外部通过IOC容器获取,所以id属性可以省略 -->
+        <property name="dept">
+            <bean class="com.okccc.spring.pojo.Dept">
+                <property name="deptId" value="1"/>
+                <property name="deptName" value="销售部"/>
+            </bean>
+        </property>
     </bean>
 
-    <!-- 配置bean对象并通过构造器赋值 -->
-    <bean id="emp02" class="com.okccc.spring.pojo.Emp">
-        <constructor-arg name="id" value="2"/>
-        <constructor-arg name="name" value="moon"/>
-        <constructor-arg name="age" value="20"/>
-        <constructor-arg name="sex" value="女"/>
+    <bean id="dept01" class="com.okccc.spring.pojo.Dept">
+        <property name="deptId" value="1"/>
+        <property name="deptName" value="技术部"/>
     </bean>
 </beans>
