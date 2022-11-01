@@ -1,6 +1,7 @@
 package com.okccc.spring.test;
 
 import com.okccc.spring.pojo.Demo;
+import com.okccc.spring.pojo.Dept;
 import com.okccc.spring.pojo.Emp;
 import com.okccc.spring.pojo.Person;
 import org.junit.Test;
@@ -52,5 +53,8 @@ public class SpringTest {
         // 依赖注入之构造器注入
         Emp emp02 = ioc.getBean("emp02", Emp.class);
         System.out.println(emp02);  // Student{id=2, name='moon', age=20, sex='女'}
+
+        Dept dept01 = ioc.getBean("dept01", Dept.class);
+        System.out.println(dept01);
     }
 }

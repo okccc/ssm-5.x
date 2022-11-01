@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
     <!--
         IOC(Inverse Of Control)：控制反转,把创建对象和对象之间相互调用的过程都交给Spring管理,降低耦合度
@@ -55,5 +55,29 @@
     <bean id="dept01" class="com.okccc.spring.pojo.Dept">
         <property name="deptId" value="1"/>
         <property name="deptName" value="技术部"/>
+        <!-- 为List集合类型属性赋值 -->
+        <!-- 方式一：引用外部bean -->
+        <property name="emps" ref="empList"/>
+        <!-- 方式二：添加list标签 -->
+        <!--        <property name="emps">-->
+        <!--            <list>-->
+        <!--                <ref bean="emp01"/>-->
+        <!--                <ref bean="emp02"/>-->
+        <!--            </list>-->
+        <!--        </property>-->
+    </bean>
+
+    <!-- list集合类型的bean -->
+    <util:list id="empList">
+        <ref bean="emp01"/>
+        <ref bean="emp02"/>
+    </util:list>
+
+    <!-- 配置bean对象并通过构造器赋值 -->
+    <bean id="emp02" class="com.okccc.spring.pojo.Emp">
+        <constructor-arg name="id" value="2"/>
+        <constructor-arg name="name" value="moon"/>
+        <constructor-arg name="age" value="20"/>
+        <constructor-arg name="sex" value="女"/>
     </bean>
 </beans>
