@@ -50,6 +50,16 @@
                 <value>烫头</value>
             </array>
         </property>
+        <!-- 为Map集合类型属性赋值 -->
+        <!-- 方式一：引用外部bean -->
+        <!--        <property name="games" ref="gameList"/>-->
+        <!-- 方式二：添加map标签 -->
+        <property name="games">
+            <map>
+                <entry key="1" value-ref="game01"/>
+                <entry key="2" value-ref="game02"/>
+            </map>
+        </property>
     </bean>
 
     <bean id="dept01" class="com.okccc.spring.pojo.Dept">
@@ -67,11 +77,27 @@
         <!--        </property>-->
     </bean>
 
+    <bean id="game01" class="com.okccc.spring.pojo.Game">
+        <property name="gameId" value="1"/>
+        <property name="gameName" value="WAR3"/>
+    </bean>
+
+    <bean id="game02" class="com.okccc.spring.pojo.Game">
+        <property name="gameId" value="2"/>
+        <property name="gameName" value="LOL"/>
+    </bean>
+
     <!-- list集合类型的bean -->
     <util:list id="empList">
         <ref bean="emp01"/>
         <ref bean="emp02"/>
     </util:list>
+
+    <!-- map集合类型的bean -->
+    <util:map id="gameList">
+        <entry key="1" value-ref="game01"/>
+        <entry key="2" value-ref="game02"/>
+    </util:map>
 
     <!-- 配置bean对象并通过构造器赋值 -->
     <bean id="emp02" class="com.okccc.spring.pojo.Emp">
