@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
-
     <!--
         IOC(Inverse Of Control)：控制反转,把创建对象和对象之间相互调用的过程都交给Spring管理,降低耦合度
         IOC底层原理: 工厂模式 + xml解析 + 反射,相当于工厂模式的升级版
@@ -106,4 +106,8 @@
         <constructor-arg name="age" value="20"/>
         <constructor-arg name="sex" value="女"/>
     </bean>
+
+    <!-- 使用p命名空间,p:empId表示字面量类型,p:empId-ref表示类类型 -->
+    <bean id="emp03" class="com.okccc.spring.pojo.Emp"
+          p:empId="3" p:empName="sky" p:dept-ref="dept01" p:games-ref="gameList"/>
 </beans>

@@ -54,6 +54,9 @@ public class SpringTest {
         Emp emp02 = ioc.getBean("emp02", Emp.class);
         System.out.println(emp02);  // Student{id=2, name='moon', age=20, sex='女'}
 
+        Emp emp03 = ioc.getBean("emp03", Emp.class);
+        System.out.println(emp03);
+
         Dept dept01 = ioc.getBean("dept01", Dept.class);
         System.out.println(dept01);
     }
