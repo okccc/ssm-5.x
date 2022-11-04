@@ -1,5 +1,6 @@
 package com.okccc.spring.test;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.okccc.spring.pojo.Demo;
 import com.okccc.spring.pojo.Dept;
 import com.okccc.spring.pojo.Emp;
@@ -59,5 +60,12 @@ public class SpringTest {
 
         Dept dept01 = ioc.getBean("dept01", Dept.class);
         System.out.println(dept01);
+    }
+
+    @Test
+    public void testJDBC() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
+        DruidDataSource dataSource = ioc.getBean(DruidDataSource.class);
+        System.out.println(dataSource.getConnectCount());
     }
 }
