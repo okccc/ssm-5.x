@@ -143,4 +143,11 @@
 
     <!-- bean的后置处理器会在生命周期初始化前后添加额外操作,并且是针对IOC容器中的所有bean -->
     <!--    <bean id="beanPost" class="com.okccc.spring.process.MyBeanPostProcessor"/>-->
+
+    <!--
+        FactoryBean是Spring提供的一种整合第三方框架的常用机制,可以隐藏复杂组件的创建过程
+        将FactoryBean接口的实现类配置成bean对象,会将其getObject()方法返回的对象交给IOC容器管理
+        Spring整合Mybatis就是通过FactoryBean机制来创建SqlSessionFactory对象
+     -->
+    <bean id="userFactoryBean" class="com.okccc.spring.factory.UserFactoryBean"/>
 </beans>

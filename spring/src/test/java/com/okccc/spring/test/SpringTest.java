@@ -83,4 +83,11 @@ public class SpringTest {
         System.out.println(bean);
         ioc.close();
     }
+
+    @Test
+    public void testFactoryBean() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
+        User bean = ioc.getBean("userFactoryBean", User.class);
+        System.out.println(bean);
+    }
 }
