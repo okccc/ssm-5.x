@@ -11,16 +11,16 @@
         ApplicationContext：BeanFactory接口的子接口,提供更多功能给开发人员使用,加载配置文件时就会创建对象,耗时操作在项目启动时就完成
         ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
         Demo demo = ioc.getBean(Demo.class);
-        反射是调用类的无参构造创建对象,所以bean只能是类类型不能是接口类型
+        反射是调用类的无参构造创建对象,所以bean只能是类类型不能是接口类型,类默认提供无参构造,如果自定义有参构造则不再提供无参构造
         Class<?> clazz = Class.forName("com.okccc.spring.pojo.Demo");
         Object o = clazz.newInstance();
-        DI(Dependency Injection)：依赖注入,IOC思想的一种具体实现,组件以预先定义好的方式接受容器的资源注入,比如setter方法和有参构造
+        DI(Dependency Injection)：依赖注入,IOC思想的具体实现,组件以预先定义好的方式接受容器的资源注入,比如setter方法和有参构造
     -->
     <bean id="demo" class="com.okccc.spring.pojo.Demo"/>
 
-    <!-- 配置bean对象并给属性赋值(常用) -->
+    <!-- 配置bean对象并通过setter方法赋值(推荐) -->
     <bean id="emp01" class="com.okccc.spring.pojo.Emp">
-        <!-- 点击属性名就会发现是通过Setter方法给对象赋值 -->
+        <!-- 点击属性名就会发现是调用setXxx() -->
         <property name="empId" value="1"/>
         <!-- 特殊符号&lt;&gt;或者直接使用CDATA区表示 -->
         <!--        <property name="name" value="a &lt; b"/>-->
@@ -119,4 +119,28 @@
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
+
+    <!--
+        bean的作用域
+        scope="singleton"：bean在IOC容器中只有一个实例,IOC容器初始化时就创建好对象(默认)
+        scope="prototype"：bean在IOC容器中可以有多个实例,因为每个实例都不一样,所以调用getBean()时才会创建对象使用
+
+        bean的生命周期
+        1.实例化：反射会调用类的无参构造创建bean对象
+        2.依赖注入：property标签给bean对象的属性赋值
+        3.初始化：bean对象初始化,init-method属性指定
+        4.销毁：destroy-method属性指定,IOC容器关闭时才会销毁
+        如果scope="singleton",生命周期的前三个步骤是在获取IOC容器时执行
+        如果scope="prototype",生命周期的前三个步骤是在获取bean对象时执行,并且此时bean对象销毁不由IOC容器控制
+    -->
+    <bean id="user" class="com.okccc.spring.pojo.User" scope="prototype"
+          init-method="initMethod" destroy-method="destroyMethod">
+        <property name="id" value="1"/>
+        <property name="username" value="grubby"/>
+        <property name="password" value="orc"/>
+        <property name="age" value="19"/>
+    </bean>
+
+    <!-- bean的后置处理器会在生命周期初始化前后添加额外操作,并且是针对IOC容器中的所有bean -->
+    <!--    <bean id="beanPost" class="com.okccc.spring.process.MyBeanPostProcessor"/>-->
 </beans>

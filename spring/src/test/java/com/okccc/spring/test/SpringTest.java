@@ -1,12 +1,10 @@
 package com.okccc.spring.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.okccc.spring.pojo.Demo;
-import com.okccc.spring.pojo.Dept;
-import com.okccc.spring.pojo.Emp;
-import com.okccc.spring.pojo.Person;
+import com.okccc.spring.pojo.*;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -67,5 +65,22 @@ public class SpringTest {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
         DruidDataSource dataSource = ioc.getBean(DruidDataSource.class);
         System.out.println(dataSource.getConnectCount());
+    }
+
+    @Test
+    public void testScope() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
+        User bean01 = ioc.getBean("user", User.class);
+        User bean02 = ioc.getBean("user", User.class);
+        System.out.println(bean01 == bean02);
+    }
+
+    @Test
+    public void testLifeCycle() {
+        // ConfigurableApplicationContext子接口提供了容器的刷新和关闭功能
+        ConfigurableApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
+        User bean = ioc.getBean("user", User.class);
+        System.out.println(bean);
+        ioc.close();
     }
 }
