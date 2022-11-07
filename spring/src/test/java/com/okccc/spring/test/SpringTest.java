@@ -1,6 +1,7 @@
 package com.okccc.spring.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.okccc.spring.controller.UserController;
 import com.okccc.spring.pojo.*;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -89,5 +90,12 @@ public class SpringTest {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
         User bean = ioc.getBean("userFactoryBean", User.class);
         System.out.println(bean);
+    }
+
+    @Test
+    public void testAutowireByXml() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserController userController = ioc.getBean(UserController.class);
+        userController.saveUser();
     }
 }

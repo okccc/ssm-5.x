@@ -150,4 +150,18 @@
         Spring整合Mybatis就是通过FactoryBean机制来创建SqlSessionFactory对象
      -->
     <bean id="userFactoryBean" class="com.okccc.spring.factory.UserFactoryBean"/>
+
+    <!--
+        基于xml的自动装配：自动为bean中的类类型或接口类型的属性赋值
+        autowire="default"：不装配,使用属性的默认值,直接报错NullPointerException
+        autowire="byType"：根据要赋值属性的类型在IOC容器中匹配某个bean,容器中只能有一个匹配的类型
+        autowire="byName"：根据要赋值属性的名字作为bean的id在IOC容器中匹配,容器中可以有多个匹配的类型
+    -->
+    <bean id="userController" class="com.okccc.spring.controller.UserController" autowire="byType">
+<!--        <property name="userService" ref="userService"/>-->
+    </bean>
+    <bean id="userService" class="com.okccc.spring.service.impl.UserServiceImpl" autowire="byName">
+<!--        <property name="userDao" ref="userDao"/>-->
+    </bean>
+    <bean id="userDao" class="com.okccc.spring.dao.impl.UserDaoImpl"/>
 </beans>
