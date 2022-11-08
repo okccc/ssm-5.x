@@ -157,11 +157,23 @@
         autowire="byType"：根据要赋值属性的类型在IOC容器中匹配某个bean,容器中只能有一个匹配的类型
         autowire="byName"：根据要赋值属性的名字作为bean的id在IOC容器中匹配,容器中可以有多个匹配的类型
     -->
-    <bean id="userController" class="com.okccc.spring.controller.UserController" autowire="byType">
-<!--        <property name="userService" ref="userService"/>-->
-    </bean>
-    <bean id="userService" class="com.okccc.spring.service.impl.UserServiceImpl" autowire="byName">
-<!--        <property name="userDao" ref="userDao"/>-->
-    </bean>
-    <bean id="userDao" class="com.okccc.spring.dao.impl.UserDaoImpl"/>
+<!--    <bean id="userController" class="com.okccc.spring.controller.UserController" autowire="byType"/>-->
+<!--    <bean id="userService" class="com.okccc.spring.service.impl.UserServiceImpl" autowire="byName"/>-->
+<!--    <bean id="userDao" class="com.okccc.spring.dao.impl.UserDaoImpl"/>-->
+
+    <!--
+        基于注解管理bean
+        注解：给类、属性、方法、构造器添加标记,@Component普通类、@Controller控制层、@Service业务层、@Repository持久层
+        扫描：Spring会扫描包下添加注解的类将其作为组件进行管理,IOC容器会自动配置该类的bean,id默认是类的小驼峰,也可以自定义但没必要
+        由于bean的class只能是类类型,所以是给UserServiceImpl/UserDaoImpl添加注解而不是UserService/UserDao
+        生产环境是基于xml和基于注解混合使用,因为第三方jar包提供的类是只读的无法添加注解
+        SpringMVC扫描控制层,Spring扫描其它层,所以需要分开防止重复扫描
+        context:exclude-filter：排除扫描,搭配use-default-filters="true"(包下所有类都要扫描)
+        context:include-filter：包含扫描,搭配use-default-filters="false"(包下所有类都不扫描)
+    -->
+    <!-- 开启组件扫描 -->
+    <context:component-scan base-package="com.okccc.spring">
+<!--        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>-->
+<!--        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+    </context:component-scan>
 </beans>

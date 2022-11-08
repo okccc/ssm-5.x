@@ -2,7 +2,11 @@ package com.okccc.spring.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.okccc.spring.controller.UserController;
+import com.okccc.spring.dao.UserDao;
+import com.okccc.spring.dao.impl.UserDaoImpl;
 import com.okccc.spring.pojo.*;
+import com.okccc.spring.service.UserService;
+import com.okccc.spring.service.impl.UserServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -70,6 +74,7 @@ public class SpringTest {
 
     @Test
     public void testScope() {
+        // bean的作用域
         ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
         User bean01 = ioc.getBean("user", User.class);
         User bean02 = ioc.getBean("user", User.class);
@@ -78,7 +83,7 @@ public class SpringTest {
 
     @Test
     public void testLifeCycle() {
-        // ConfigurableApplicationContext子接口提供了容器的刷新和关闭功能
+        // bean的生命周期：ConfigurableApplicationContext子接口提供了容器的刷新和关闭功能
         ConfigurableApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
         User bean = ioc.getBean("user", User.class);
         System.out.println(bean);
@@ -87,6 +92,7 @@ public class SpringTest {
 
     @Test
     public void testFactoryBean() {
+        // FactoryBean
         ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
         User bean = ioc.getBean("userFactoryBean", User.class);
         System.out.println(bean);
@@ -94,8 +100,21 @@ public class SpringTest {
 
     @Test
     public void testAutowireByXml() {
+        // 基于xml的自动装配
         ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserController userController = ioc.getBean(UserController.class);
         userController.saveUser();
+    }
+
+    @Test
+    public void testAutowireByAnnotation() {
+        // 基于注解管理bean
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserController userController = ioc.getBean(UserController.class);
+        System.out.println(userController);
+        UserService userService = ioc.getBean(UserServiceImpl.class);
+        System.out.println(userService);
+        UserDao userDao = ioc.getBean(UserDaoImpl.class);
+        System.out.println(userDao);
     }
 }

@@ -1,12 +1,14 @@
 package com.okccc.spring.controller;
 
 import com.okccc.spring.service.UserService;
+import org.springframework.stereotype.Controller;
 
 /**
  * Author: okccc
  * Date: 2022/10/25 3:01 下午
  * Desc:
  */
+@Controller
 public class UserController {
 
     private UserService userService;
