@@ -112,9 +112,11 @@ public class SpringTest {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserController userController = ioc.getBean(UserController.class);
         System.out.println(userController);
-        UserService userService = ioc.getBean(UserServiceImpl.class);
+        UserService userService = ioc.getBean("userService", UserServiceImpl.class);
         System.out.println(userService);
         UserDao userDao = ioc.getBean(UserDaoImpl.class);
         System.out.println(userDao);
+        // 基于注解的自动装配
+        userController.saveUser();
     }
 }
