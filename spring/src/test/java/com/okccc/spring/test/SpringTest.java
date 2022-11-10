@@ -1,6 +1,10 @@
 package com.okccc.spring.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.okccc.spring.aop.Calculator;
+import com.okccc.spring.aop.CalculatorImpl;
+import com.okccc.spring.aop.CalculatorStaticProxy;
+import com.okccc.spring.aop.ProxyFactory;
 import com.okccc.spring.controller.UserController;
 import com.okccc.spring.dao.UserDao;
 import com.okccc.spring.dao.impl.UserDaoImpl;
@@ -118,5 +122,24 @@ public class SpringTest {
         System.out.println(userDao);
         // 基于注解的自动装配
         userController.saveUser();
+    }
+
+    @Test
+    public void testProxy() {
+        // 不使用代理：目标对象直接实现
+        CalculatorImpl calculatorImpl = new CalculatorImpl();
+        System.out.println(calculatorImpl.add(10, 20));
+
+        // 使用静态代理：通过代理对象实现
+        CalculatorStaticProxy staticProxy = new CalculatorStaticProxy(new CalculatorImpl());
+        System.out.println(staticProxy.add(10, 20));
+
+        // 使用动态代理：虽然还不知道代理对象是啥,但是代理对象和目标对象实现了相同接口,所以返回接口类型即可
+        ProxyFactory proxyFactory = new ProxyFactory(new CalculatorImpl());
+        // java.lang.ClassCastException: com.sun.proxy.$Proxy4 cannot be cast to com.okccc.spring.proxy.CalculatorImpl
+//        CalculatorImpl proxy = (CalculatorImpl) proxyFactory.getProxy();
+        Calculator dynamicProxy = (Calculator) proxyFactory.getProxy();
+        System.out.println(dynamicProxy.add(10, 20));
+//        System.out.println(dynamicProxy.div(10, 0));
     }
 }
