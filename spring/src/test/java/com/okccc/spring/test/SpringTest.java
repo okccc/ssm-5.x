@@ -25,8 +25,9 @@ public class SpringTest {
 
     @Test
     public void testIOC() throws Exception {
-        // 获取IOC容器,工程最终会打包到服务器运行,而服务器磁盘路径不一定有当前文件,所以选ClassPathXml而不是FileSystemXml
+        // 加载配置文件(IOC容器初始化)
         // java包和resources包最终都会加载到classes路径下,所以代码可以直接访问配置文件
+        // 工程最终会打包到服务器运行,而服务器磁盘路径不一定有当前文件,所以选ClassPath而不是FileSystem
         ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         // 1.根据id获取bean
@@ -141,5 +142,15 @@ public class SpringTest {
         Calculator dynamicProxy = (Calculator) proxyFactory.getProxy();
         System.out.println(dynamicProxy.add(10, 20));
 //        System.out.println(dynamicProxy.div(10, 0));
+    }
+
+    @Test
+    public void testAOP() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
+        // AOP底层是动态代理,此时IOC容器无法获取目标对象只能获取代理对象,不然代理模式就没意义了
+        // NoSuchBeanDefinitionException: No qualifying bean of type 'com.okccc.spring.proxy.CalculatorImpl' available
+//        CalculatorImpl calculator = ioc.getBean(CalculatorImpl.class);
+        Calculator calculator = ioc.getBean(Calculator.class);
+        System.out.println(calculator.div(10, 5));
     }
 }
