@@ -197,5 +197,22 @@
         2.切面类必须添加@Aspect注解标识,Aspect是AOP思想的具体实现
     -->
     <!-- 基于注解的AOP(推荐) -->
-    <aop:aspectj-autoproxy/>
+<!--    <aop:aspectj-autoproxy/>-->
+
+    <!-- 基于xml的AOP(了解) -->
+    <aop:config>
+        <!-- 设置公共切入点表达式 -->
+        <aop:pointcut id="pointCut" expression="execution(* com.okccc.spring.aop.*.*(..))"/>
+        <!-- 将IOC容器中的某个bean设置为切面 -->
+        <aop:aspect ref="loggerAspectByXml">
+            <aop:before method="beforeAdvice" pointcut-ref="pointCut"/>
+            <aop:after-returning method="afterReturningAdvice" pointcut-ref="pointCut" returning="result"/>
+            <aop:after-throwing method="afterThrowingAdvice" pointcut-ref="pointCut" throwing="e"/>
+            <aop:after method="afterAdvice" pointcut-ref="pointCut"/>
+            <aop:around method="aroundAdvice" pointcut-ref="pointCut"/>
+        </aop:aspect>
+        <aop:aspect ref="validateAspect" order="1">
+            <aop:before method="beforeAdvice" pointcut-ref="pointCut"/>
+        </aop:aspect>
+    </aop:config>
 </beans>
