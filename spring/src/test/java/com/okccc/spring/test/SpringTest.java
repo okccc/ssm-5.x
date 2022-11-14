@@ -12,15 +12,21 @@ import com.okccc.spring.pojo.*;
 import com.okccc.spring.service.UserService;
 import com.okccc.spring.service.impl.UserServiceImpl;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Author: okccc
  * Date: 2022/10/15 12:27 下午
  * Desc:
  */
+// Spring整合Junit4,表示当前类是在spring测试环境执行,这样就可以通过注入方式直接获取IOC容器的bean
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:applicationContext.xml")
 public class SpringTest {
 
     @Test
