@@ -13,11 +13,16 @@ import com.okccc.spring.service.UserService;
 import com.okccc.spring.service.impl.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 /**
  * Author: okccc
@@ -158,5 +163,42 @@ public class SpringTest {
 //        CalculatorImpl calculator = ioc.getBean(CalculatorImpl.class);
         Calculator calculator = ioc.getBean(Calculator.class);
         System.out.println(calculator.div(10, 5));
+    }
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @Test
+    public void testJdbcTemplate() {
+        // JdbcTemplate实现增删改查
+//        ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
+//        JdbcTemplate jdbcTemplate = ioc.getBean(JdbcTemplate.class);
+
+        // insert
+        String sql01 = "insert into user values(null, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql01, "th000", "th000", 20, "男", "hum@qq.com");
+
+        // update
+        String sql02 = "update user set password = ? where username = ?";
+        jdbcTemplate.update(sql02, "orc002", "fly");
+
+        // delete
+        String sql03 = "delete from user where username = ?";
+        jdbcTemplate.update(sql03, "tod");
+
+        // 查询单条数据返回实体类对象
+        String sql04 = "select * from t_game where game_id = ?";
+        Game game = jdbcTemplate.queryForObject(sql04, new BeanPropertyRowMapper<>(Game.class), 30);
+        System.out.println(game);
+
+        // 查询多条数据返回list集合
+        String sql05 = "select * from t_game";
+        List<Game> list = jdbcTemplate.query(sql05, new BeanPropertyRowMapper<>(Game.class));
+        list.forEach(System.out::println);
+
+        // 查询单行单列
+        String sql06 = "select count(*) from t_user";
+        Integer cnt = jdbcTemplate.queryForObject(sql06, Integer.class);
+        System.out.println(cnt);
     }
 }

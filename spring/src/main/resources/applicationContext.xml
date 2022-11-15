@@ -112,15 +112,6 @@
     <bean id="emp03" class="com.okccc.spring.pojo.Emp"
           p:empId="3" p:empName="sky" p:dept-ref="dept01" p:games-ref="gameList"/>
 
-    <!-- 引入外部属性文件 -->
-    <context:property-placeholder location="jdbc.properties"/>
-    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="driverClassName" value="${jdbc.driver}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
-    </bean>
-
     <!--
         bean的作用域
         scope="singleton"：bean在IOC容器中只有一个实例,IOC容器初始化时就创建好对象(默认)
@@ -197,22 +188,36 @@
         2.切面类必须添加@Aspect注解标识,Aspect是AOP思想的具体实现
     -->
     <!-- 基于注解的AOP(推荐) -->
-<!--    <aop:aspectj-autoproxy/>-->
+    <aop:aspectj-autoproxy/>
 
     <!-- 基于xml的AOP(了解) -->
-    <aop:config>
-        <!-- 设置公共切入点表达式 -->
-        <aop:pointcut id="pointCut" expression="execution(* com.okccc.spring.aop.*.*(..))"/>
-        <!-- 将IOC容器中的某个bean设置为切面 -->
-        <aop:aspect ref="loggerAspectByXml">
-            <aop:before method="beforeAdvice" pointcut-ref="pointCut"/>
-            <aop:after-returning method="afterReturningAdvice" pointcut-ref="pointCut" returning="result"/>
-            <aop:after-throwing method="afterThrowingAdvice" pointcut-ref="pointCut" throwing="e"/>
-            <aop:after method="afterAdvice" pointcut-ref="pointCut"/>
-            <aop:around method="aroundAdvice" pointcut-ref="pointCut"/>
-        </aop:aspect>
-        <aop:aspect ref="validateAspect" order="1">
-            <aop:before method="beforeAdvice" pointcut-ref="pointCut"/>
-        </aop:aspect>
-    </aop:config>
+<!--    <aop:config>-->
+<!--        &lt;!&ndash; 设置公共切入点表达式 &ndash;&gt;-->
+<!--        <aop:pointcut id="pointCut" expression="execution(* com.okccc.spring.aop.*.*(..))"/>-->
+<!--        &lt;!&ndash; 将IOC容器中的某个bean设置为切面 &ndash;&gt;-->
+<!--        <aop:aspect ref="loggerAspectByXml">-->
+<!--            <aop:before method="beforeAdvice" pointcut-ref="pointCut"/>-->
+<!--            <aop:after-returning method="afterReturningAdvice" pointcut-ref="pointCut" returning="result"/>-->
+<!--            <aop:after-throwing method="afterThrowingAdvice" pointcut-ref="pointCut" throwing="e"/>-->
+<!--            <aop:after method="afterAdvice" pointcut-ref="pointCut"/>-->
+<!--            <aop:around method="aroundAdvice" pointcut-ref="pointCut"/>-->
+<!--        </aop:aspect>-->
+<!--        <aop:aspect ref="validateAspect" order="1">-->
+<!--            <aop:before method="beforeAdvice" pointcut-ref="pointCut"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+    <!-- 引入外部属性文件 -->
+    <context:property-placeholder location="jdbc.properties"/>
+    <!-- 配置数据源 -->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!-- 配置JdbcTemplate -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="druidDataSource"/>
+    </bean>
 </beans>
