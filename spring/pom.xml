@@ -33,6 +33,12 @@
             <artifactId>spring-test</artifactId>
             <version>5.3.1</version>
         </dependency>
+        <!-- spring整合持久层需要orm、jdbc、tx三个jar包 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>5.3.1</version>
+        </dependency>
 
         <!-- junit测试 -->
         <dependency>

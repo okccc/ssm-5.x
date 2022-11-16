@@ -2,8 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
        xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!--
         IOC(Inverse Of Control)：控制反转,把创建对象和对象之间相互调用的过程都交给Spring管理,降低耦合度
         IOC底层原理: 工厂模式 + xml解析 + 反射,相当于工厂模式的升级版
@@ -220,4 +220,32 @@
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="druidDataSource"/>
     </bean>
+
+    <!--
+       编程式事务：所有操作都需要硬编码实现,且没法复用
+        Connection conn = ...;
+        try {
+            // 关闭自动提交事务
+            conn.setAutoCommit(false);
+            // 业务操作
+            ...
+            // 手动提交事务
+            conn.commit();
+        } catch (Exception e) {
+            // 回滚事务
+            conn.rollBack();
+        } finally {
+            // 释放连接
+            conn.close();
+        }
+        声明式事务：事务控制的代码结构基本确定,可以将其抽取封装,框架通过配置来实现功能,提高开发效率,消除冗余代码
+    -->
+    <!-- 配置事务管理器,相当于切面 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="druidDataSource"/>
+    </bean>
+
+    <!-- 基于注解的声明式事务(推荐) -->
+    <!-- 开启事务的注解驱动,相当于通知,添加@Transactional注解的方法或类中所有方法都会被事务管理,通常是在处理业务逻辑的Service层 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>
