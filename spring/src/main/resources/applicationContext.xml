@@ -247,5 +247,19 @@
 
     <!-- 基于注解的声明式事务(推荐) -->
     <!-- 开启事务的注解驱动,相当于通知,添加@Transactional注解的方法或类中所有方法都会被事务管理,通常是在处理业务逻辑的Service层 -->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+<!--    <tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+    <!-- 基于xml的声明式事务(了解) -->
+    <!-- 配置事务通知 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*"/>
+            <tx:method name="checkout"/>
+            <tx:method name="buyBook" no-rollback-for="java.lang.ArithmeticException" propagation="REQUIRES_NEW"/>
+        </tx:attributes>
+    </tx:advice>
+    <!-- 配置切面的通知和切入点表达式 -->
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.okccc.spring.service.impl.*.*(..))"/>
+    </aop:config>
 </beans>

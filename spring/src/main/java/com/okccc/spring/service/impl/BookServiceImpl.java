@@ -4,7 +4,6 @@ import com.okccc.spring.dao.BookDao;
 import com.okccc.spring.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Author: okccc
@@ -18,7 +17,6 @@ public class BookServiceImpl implements BookService {
     private BookDao bookDao;
 
     @Override
-    @Transactional
     public void buyBook(Integer userId, Integer bookId) {
         // 查询图书价格
         Integer price = bookDao.getPriceByBookId(bookId);
