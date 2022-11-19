@@ -23,7 +23,11 @@ public class BookServiceImpl implements BookService {
     @Transactional(
             // 只读：表示当前操作不涉及写操作,这样数据库就能针对查询操作进行优化
             // Connection is read-only. Queries leading to data modification are not allowed
-            readOnly = true
+//            readOnly = true,
+
+            // 超时：因为某些问题导致程序卡住会长时间占用数据库连接,应该超时回滚及时释放资源,好让别的程序运行
+            // Transaction timed out: deadline was Tue Nov 08 18:23:36 CST 2022
+            timeout = 3
     )
     public void buyBook(Integer userId, Integer bookId) {
         try {
