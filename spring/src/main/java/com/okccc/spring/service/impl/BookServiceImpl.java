@@ -27,7 +27,12 @@ public class BookServiceImpl implements BookService {
 
             // 超时：因为某些问题导致程序卡住会长时间占用数据库连接,应该超时回滚及时释放资源,好让别的程序运行
             // Transaction timed out: deadline was Tue Nov 08 18:23:36 CST 2022
-            timeout = 3
+//            timeout = 3,
+
+            // 回滚策略：声明式事务默认只对运行时异常回滚,编译时异常不回滚,可以手动配置
+            // 买书功能虽然出现数学运算异常ArithmeticException,但是更新库存和更新余额正常执行
+            noRollbackFor = ArithmeticException.class,
+            noRollbackForClassName = "java.lang.ArithmeticException"
     )
     public void buyBook(Integer userId, Integer bookId) {
         try {
@@ -42,6 +47,8 @@ public class BookServiceImpl implements BookService {
         bookDao.updateStock(bookId);
         // 更新用户余额
         bookDao.updateBalance(userId, price);
+        // 验证事务回滚策略
+        System.out.println(1/0);
     }
 
 }
