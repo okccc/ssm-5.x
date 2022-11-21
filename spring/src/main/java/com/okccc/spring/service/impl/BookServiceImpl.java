@@ -4,6 +4,7 @@ import com.okccc.spring.dao.BookDao;
 import com.okccc.spring.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.TimeUnit;
@@ -32,7 +33,10 @@ public class BookServiceImpl implements BookService {
             // 回滚策略：声明式事务默认只对运行时异常回滚,编译时异常不回滚,可以手动配置
             // 买书功能虽然出现数学运算异常ArithmeticException,但是更新库存和更新余额正常执行
             noRollbackFor = ArithmeticException.class,
-            noRollbackForClassName = "java.lang.ArithmeticException"
+            noRollbackForClassName = "java.lang.ArithmeticException",
+
+            // 隔离级别：和ACID的持久性有关,读未提交、读已提交(Oracle默认)、可重复度(MySQL默认,且不会出现幻读)、串行化
+            isolation = Isolation.DEFAULT
     )
     public void buyBook(Integer userId, Integer bookId) {
         try {
@@ -48,7 +52,7 @@ public class BookServiceImpl implements BookService {
         // 更新用户余额
         bookDao.updateBalance(userId, price);
         // 验证事务回滚策略
-        System.out.println(1/0);
+//        System.out.println(1/0);
     }
 
 }
