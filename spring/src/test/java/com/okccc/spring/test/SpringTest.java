@@ -243,6 +243,10 @@ public class SpringTest {
          * 添加事务后：执行sql还是抛那个异常,但是查看数据库表发现图书库存和用户余额都没更新,这才是合理的
          */
 
-        bookController.buyBook(1, 1);
+        // 测试事务属性：只读、超时、回滚策略、隔离级别
+//        bookController.buyBook(1, 1);
+
+        // 测试事务属性：传播行为
+        bookController.checkout(1, new Integer[]{1, 2});
     }
 }
