@@ -26,6 +26,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Project Structure - Modules - springmvc - Web - Deployment Descriptors - Add web.xml - src/main/webapp/WEB-INF
  * 3.创建springmvc.xml,扫描控制层组件、配置Thymeleaf视图解析器、配置默认Servlet处理静态资源、开启mvc注解驱动
  * 4.部署到tomcat并测试：Edit Configurations - Add New Configuration - Tomcat Server - Local - Name - Deployment & Server
+ *
+ * SpringMVC工作流程
+ * 1.浏览器发送请求,如果请求路径符合DispatcherServlet的url-pattern规则就会被处理
+ * 2.DispatcherServlet会将请求路径和请求映射进行匹配,找到处理当前请求的控制器方法并执行,返回逻辑视图
+ * 3.Thymeleaf视图解析器会渲染逻辑视图,加上前后缀将其拼接成物理视图,然后转发到WEB-INF目录下该视图对应的html页面
+ *
+ * DispatcherServlet处理请求 - HandlerMapping匹配控制器方法 - (执行拦截器的preHandler方法) - HandlerAdapter执行控制器方法
+ * - (执行拦截器的postHandler方法) - 处理ModelAndView渲染视图 - (执行拦截器的afterCompletion方法) - 将结果响应到浏览器
  */
 @Controller  // 标识为控制层组件,交给SpringIOC容器管理
 public class HelloController {
