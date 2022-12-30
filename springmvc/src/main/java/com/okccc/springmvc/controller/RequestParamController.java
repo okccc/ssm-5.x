@@ -26,6 +26,9 @@ import javax.servlet.http.HttpServletRequest;
  *
  * 3.通过控制器方法的实体类类型的形参获取(常用)
  * 在控制器方法设置实体类类型的形参,实体类的属性名和请求参数名相同即可
+ *
+ * 4.解决获取请求参数的乱码问题
+ * 在web.xml配置Spring编码过滤器CharacterEncodingFilter
  */
 @Controller
 public class RequestParamController {
