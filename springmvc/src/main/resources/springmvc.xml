@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- 扫描组件 -->
     <context:component-scan base-package="com.okccc.springmvc">
@@ -28,4 +29,24 @@
             </bean>
         </property>
     </bean>
+
+    <!--
+       配置默认Servlet处理静态资源
+       当前工程的web.xml配置的DispatcherServlet的url-pattern是/
+       tomcat的web.xml配置的DefaultServlet的url-pattern也是/,针对所有工程
+       此时浏览器发送的请求会优先被DispatcherServlet处理,但是DispatcherServlet无法处理静态资源
+       如果只配置了<mvc:default-servlet-handler/>,浏览器发送的所有请求都会被DefaultServlet处理
+       如果还配置了<mvc:annotation-driven/>,浏览器发送的请求先被DispatcherServlet处理,无法处理时再交给DefaultServlet处理
+    -->
+    <mvc:default-servlet-handler/>
+
+    <!--
+        开启mvc注解驱动
+        可能会报错NoSuchBeanDefinitionException: No bean named 'cacheManager' available
+        因为springmvc.xml在配置<mvc:xxx/>标签时namespace会自动引入cache,将约束中的cache全部替换成mvc即可
+    -->
+    <mvc:annotation-driven/>
+
+    <!-- 配置视图控制器 -->
+    <mvc:view-controller path="/" view-name="index"/>
 </beans>
