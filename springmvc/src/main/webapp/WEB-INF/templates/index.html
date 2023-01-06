@@ -69,5 +69,50 @@
     <input type="submit" value="测试删除用户">
 </form>
 <a th:href="@{/employee}">查询所有员工</a><br>
+<hr>
+
+<div id="app">
+    <h2>SpringMVC处理ajax请求</h2>
+    <input type="button" value="测试@RequestBody获取json格式的请求参数(F12查看Console)" @click="testRequestBody()"><br>
+    <a th:href="@{/ajax/responseBody}">测试@ResponseBody响应浏览器数据</a><br>
+    <input type="button" value="测试@ResponseBody响应json格式的数据(F12查看Console)" @click="testResponseBody()"><br>
+    <a th:href="@{/ajax/download}">测试下载功能</a><br>
+    <form th:action="@{/ajax/upload}" method="post" enctype="multipart/form-data">
+        <input type="file" name="photo"><br>
+        <input type="submit" value="测试上传功能">
+    </form>
+</div>
+<!-- 通过vue处理点击事件 -->
+<script type="text/javascript">
+    var vue = new Vue({
+        el:"#app",
+        methods:{
+            testRequestBody(){
+                // 使用axios发送ajax请求
+                axios.post(
+                    "/springmvc/ajax/requestBody/jsonToPojo",
+                    // "/springmvc/ajax/requestBody/jsonToMap",
+                    {username:"admin", password:"123456"}
+                ).then(response=>{
+                    // 浏览器F12 - Console查看控制台日志调试前端代码
+                    console.log(response.data);
+                });
+            },
+            testResponseBody(){
+                axios.post(
+                    "/springmvc/ajax/responseBody/pojoToJson"
+                    // "/springmvc/ajax/responseBody/mapToJson"
+                    // "/springmvc/ajax/responseBody/listToJson"
+                ).then(response=>{
+                    console.log(response.data);
+                });
+            }
+        }
+    });
+</script>
+<hr>
+
+<a th:href="@{/interceptor}">测试拦截器</a><br>
+<a th:href="@{/exception}">测试异常处理器</a>
 </body>
 </html>
