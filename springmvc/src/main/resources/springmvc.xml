@@ -49,4 +49,7 @@
 
     <!-- 配置视图控制器 -->
     <mvc:view-controller path="/" view-name="index"/>
+
+    <!-- 配置文件上传解析器,将文件转换为MultipartFile对象 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 </beans>
