@@ -52,4 +52,20 @@
 
     <!-- 配置文件上传解析器,将文件转换为MultipartFile对象 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <!-- ref标签配置的拦截器默认对DispatcherServlet处理的所有请求路径进行拦截 -->
+        <!--        <ref bean="interceptor01" />-->
+        <!--        <ref bean="interceptor02" />-->
+        <!-- 配置需要拦截的请求 -->
+        <mvc:interceptor>
+            <!-- /**表示所有请求路径,/*表示单层请求路径 -->
+            <mvc:mapping path="/interceptor/**"/>
+            <!-- 需要排除拦截的请求路径 -->
+            <!--            <mvc:exclude-mapping path="/**"/>-->
+            <!-- 指定拦截器 -->
+            <ref bean="interceptor01" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
