@@ -46,4 +46,15 @@ public class HelloController {
         // 返回逻辑视图 success -> /WEB-INF/templates/success.html
         return "success";
     }
+
+    @RequestMapping("/interceptor")
+    public String interceptor() {
+        return "success";
+    }
+
+    @RequestMapping("/exception")
+    public String exception() {
+        System.out.println(1/0);
+        return "success";
+    }
 }

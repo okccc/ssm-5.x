@@ -68,4 +68,16 @@
             <ref bean="interceptor01" />
         </mvc:interceptor>
     </mvc:interceptors>
+
+    <!-- 配置异常处理器 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!-- 设置异常信息和跳转页面的逻辑视图 -->
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.ArithmeticException">error</prop>
+            </props>
+        </property>
+        <!-- 设置在请求域中共享的异常信息的属性名 -->
+        <property name="exceptionAttribute" value="e"/>
+    </bean>
 </beans>
