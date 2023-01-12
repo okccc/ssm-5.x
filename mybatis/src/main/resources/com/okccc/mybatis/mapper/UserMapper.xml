@@ -49,7 +49,7 @@
         resultType设置结果类型,即查询数据要转换成的java类型
         resultMap自定义映射,处理一对多或多对一的映射关系
     -->
-    <!-- User getUserById(); -->
+    <!-- User getUserById(@Param("id") Integer id); -->
     <select id="getUserById" resultType="User">
         select * from t_user where id = #{id}
     </select>

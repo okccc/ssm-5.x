@@ -13,11 +13,11 @@ import java.util.Map;
  * Desc: mapper接口
  *
  * idea设置mybatis核心配置文件和映射文件模板
- * Intellij IDEA - Preferences - Editor - File and Code Templates - Files - mybatis-config/mapper
+ * Intellij IDEA - Preferences - Editor - File and Code Templates - Files - mybatis-config/mybatis-mapper
  *
  * mybatis参数类型
- * 1.java实体类
- * 2.单个或多个字段,通常会给参数添加@Param("key")注解,通过#{key}或者${key}获取值
+ * 1.字面量类型,通常会给参数添加@Param("key")注解,通过#{key}或者${key}获取值
+ * 2.实体类类型
  *
  * mybatis获取参数值的两种方式
  * 1.${}字符串拼接,可能存在sql注入问题
