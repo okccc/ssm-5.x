@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!--
+        配置Spring监听器,在服务器启动时加载Spring配置文件,默认位置和名称/WEB-INF/applicationContext.xml
+        服务器三大组件执行顺序：Listener -> Filter -> Servlet
+        SpringMVC的IOC容器是在DispatcherServlet初始化时创建,而Controller依赖于Service所以Spring的IOC容器必须提前创建好
+        否则启动时报错NoSuchBeanDefinitionException: No qualifying bean of type 'com.okccc.service.HelloService'
+    -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- 自定义Spring配置文件的位置和名称 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring.xml</param-value>
+    </context-param>
+
+    <!-- 配置Spring编码过滤器,必须配置在其他过滤器前面,因为设置编码前不能获取其它请求参数否则编码无效 -->
+    <filter>
+        <!-- 输入类名会自动提示类的全路径,不需要从头到尾手打 -->
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <!-- 设置请求编码 -->
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <!-- 设置响应编码 -->
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 配置SpringMVC处理PUT和DELETE请求方式的过滤器 -->
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 配置SpringMVC前端控制器DispatcherServlet -->
+    <servlet>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 设置DispatcherServlet初始化时要加载的SpringMVC核心配置文件的位置和名称 -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!-- classpath表示从类路径查找配置文件,包括src/main/java和src/main/resources -->
+            <param-value>classpath:springmvc.xml</param-value>
+        </init-param>
+        <!-- 框架核心组件启动时会有大量初始化操作,放在第一次请求时才执行会严重影响访问速度,所以将DispatcherServlet初始化时间提前到服务器启动时 -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <!--
+            路径匹配/和/*的区别
+            /*：匹配浏览器向服务器发送的所有请求(包括.jsp)
+            /：匹配浏览器向服务器发送的所有请求(不包括.jsp,因为.jsp只有Tomcat的JspServlet才能处理,DispatcherServlet处理不了)
+        -->
+        <servlet-name>DispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>
