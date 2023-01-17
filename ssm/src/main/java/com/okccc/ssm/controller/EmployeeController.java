@@ -8,4 +8,5 @@ package com.okccc.ssm.controller;
  * 1.创建maven工程导入相关依赖并标记为war包
  * 2.创建web.xml：Spring监听器、Spring编码过滤器、SpringMVC请求方式过滤器、SpringMVC前端控制器
  * 3.创建springmvc.xml：扫描控制层组件、Thymeleaf视图解析器、默认Servlet、mvc注解驱动、视图控制器、文件上传解析器
+ * 4.部署到tomcat并启动：Edit Configurations - Add New Configuration - Tomcat Server - Local - Name - Deployment & Server
  */
