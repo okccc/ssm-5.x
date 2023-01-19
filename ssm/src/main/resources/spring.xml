@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 扫描控制层以外的组件 -->
+    <context:component-scan base-package="com.okccc.ssm">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 引入jdbc.properties,然后就可以在当前文件使用${key}获取value -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!-- 配置druid数据源 -->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="validationQuery" value="${validationQuery}"/>
+        <property name="testOnBorrow" value="${testOnBorrow}"/>
+        <property name="testOnReturn" value="${testOnReturn}"/>
+        <property name="testWhileIdle" value="${testWhileIdle}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/>
+    </bean>
+
+    <!-- 配置事务管理器,相当于切面 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="druidDataSource"/>
+    </bean>
+
+    <!-- 开启事务的注解驱动,相当于通知,添加@Transactional注解的方法或类中所有方法都会被事务管理,通常是在处理业务逻辑的Service层 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- Spring整合Mybatis -->
+    <!-- 配置创建SqlSessionFactory的工厂Bean,完整流程SqlSessionFactoryBean - SqlSessionFactory - SqlSession -->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定mybatis核心配置文件,当前spring.xml可以搞定大部分配置,不好配的就还放到mybatis-config.xml -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!-- 配置数据源 -->
+        <property name="dataSource" ref="druidDataSource"/>
+        <!-- 配置类型别名,该包下的所有类型都拥有默认别名,即类名本身且不区分大小写 -->
+        <property name="typeAliasesPackage" value="com.okccc.ssm.pojo"/>
+        <!-- 配置映射文件路径,只有当mapper接口的包和映射文件的包路径不一致时才需要 -->
+<!--        <property name="mapperLocations" value="classpath:mappers/*.xml"/>-->
+        <!-- 配置插件 -->
+        <property name="plugins">
+            <array>
+                <!-- 分页插件 -->
+                <bean class="com.github.pagehelper.PageInterceptor"/>
+            </array>
+        </property>
+    </bean>
+
+    <!-- 配置mapper接口扫描 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- SqlSession使用代理模式创建mapper接口的代理实现类对象并交给IOC容器管理,然后在Service层自动装备mapper接口即可 -->
+        <property name="basePackage" value="com.okccc.ssm.mapper"/>
+    </bean>
+</beans>
