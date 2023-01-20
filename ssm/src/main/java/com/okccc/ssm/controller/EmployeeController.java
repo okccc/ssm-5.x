@@ -11,4 +11,8 @@ package com.okccc.ssm.controller;
  * 4.部署到tomcat并启动：Edit Configurations - Add New Configuration - Tomcat Server - Local - Name - Deployment & Server
  * 5.搭建mybatis环境：jdbc.properties、mybatis-config.xml、Mapper接口和映射文件、log4j.xml
  * 6.创建spring.xml：扫描其它层组件、mysql数据源以及事务、spring整合mybatis
+ *
+ * 报错：java: Compilation failed: internal java compiler error
+ * 原因：项目的jdk版本不对
+ * 解决：Intellij IDEA - Preferences - Build - Compiler - Java Compiler - Module - Target bytecode version - 8
  */
