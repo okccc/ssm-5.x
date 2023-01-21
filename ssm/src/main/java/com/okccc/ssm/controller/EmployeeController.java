@@ -15,4 +15,7 @@ package com.okccc.ssm.controller;
  * 报错：java: Compilation failed: internal java compiler error
  * 原因：项目的jdk版本不对
  * 解决：Intellij IDEA - Preferences - Build - Compiler - Java Compiler - Module - Target bytecode version - 8
+ *
+ * 报错：spring.xml上方提示module ssm. File is included in 4 contexts
+ * 解决：Project Structure - Modules - ssm - Spring - 先删除右侧所有xml再重新添加进来
  */
