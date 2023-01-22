@@ -18,4 +18,8 @@ package com.okccc.ssm.controller;
  *
  * 报错：spring.xml上方提示module ssm. File is included in 4 contexts
  * 解决：Project Structure - Modules - ssm - Spring - 先删除右侧所有xml再重新添加进来
+ *
+ * 报错：ERROR com.alibaba.druid.pool.DruidDataSource - testWhileIdle is true, validationQuery not set
+ * 原因：没有校验druid数据源的连接是否有效
+ * 解决：spring.xml配置druid数据源时添加相关校验属性
  */
