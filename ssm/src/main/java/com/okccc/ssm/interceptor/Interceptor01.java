@@ -24,6 +24,10 @@ import javax.servlet.http.HttpServletResponse;
  * 3.多个拦截器执行顺序和springmvc.xml中配置的顺序有关
  * 如果所有拦截器preHandle()都返回true：preHandle()按照配置顺序执行,postHandle()和afterCompletion()按照配置反序执行
  * 如果某个拦截器preHandle()返回false：preHandle()都执行,postHandle()都不执行,返回false之前的拦截器的afterCompletion()会执行
+ *
+ * 报错：@Override is not allowed when implementing interface method, Set language level to 6 - @Override in interfaces
+ * 原因：jdk5只允许在继承父类时重写方法,jdk6开始才支持实现接口也能重写方法
+ * 解决：Project Structure - Modules - ssm - Sources - Language level  - 8
  */
 @Component
 public class Interceptor01 implements HandlerInterceptor {
