@@ -102,6 +102,13 @@
             <version>3.5.7</version>
         </dependency>
 
+        <!-- mybatis-plus会自动维护mybatis和mybatis-spring相关依赖 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+
         <!-- mybatis-spring提供了SqlSessionFactoryBean-->
         <dependency>
             <groupId>org.mybatis</groupId>

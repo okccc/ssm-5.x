@@ -34,8 +34,13 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <!-- Spring整合Mybatis -->
-    <!-- 配置创建SqlSessionFactory的工厂Bean,完整流程SqlSessionFactoryBean - SqlSessionFactory - SqlSession -->
-    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!--
+        配置创建SqlSessionFactory的工厂Bean,完整流程SqlSessionFactoryBean - SqlSessionFactory - SqlSession
+        Mybatis提供的：org.mybatis.spring.SqlSessionFactoryBean
+        Mybatis-Plus提供的：com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean
+    -->
+    <!--    <bean class="org.mybatis.spring.SqlSessionFactoryBean">-->
+    <bean class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
         <!-- 指定mybatis核心配置文件,当前spring.xml可以搞定大部分配置,不好配的就还放到mybatis-config.xml -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!-- 配置数据源 -->
