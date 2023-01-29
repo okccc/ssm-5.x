@@ -1,12 +1,10 @@
 package com.okccc.ssm.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.okccc.ssm.pojo.Employee;
 import com.okccc.ssm.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -44,3 +42,22 @@ import java.util.List;
  * 修改员工       ->  /employee         PUT
  * 根据id删除员工  ->  /employee/1       DELETE
  */
+@Controller
+public class EmployeeController {
+
+    @Autowired
+    private EmployeeService employeeService;
+
+    /**
+     * 查询所有员工
+     */
+    @RequestMapping(value = "/employee", method = RequestMethod.GET)
+    public String getAllEmployee(Model model) {
+        // 查询所有员工信息
+        List<Employee> employeeList = employeeService.getAllEmployee();
+        // 将数据共享到请求域
+        model.addAttribute("employeeList", employeeList);
+        // 跳转到列表页面
+        return "employee_list";
+    }
+}

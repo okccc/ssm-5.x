@@ -1,5 +1,9 @@
 package com.okccc.ssm.mapper;
 
+import com.okccc.ssm.pojo.Employee;
+
+import java.util.List;
+
 /**
  * @Author: okccc
  * @Date: 2022/12/20 10:48
@@ -14,4 +18,9 @@ package com.okccc.ssm.mapper;
  * 2.#{}占位符赋值(推荐),但是有些特殊sql只能使用字符串拼接
  */
 public interface EmployeeMapper {
+
+    /**
+     * 查询所有员工
+     */
+    List<Employee> getAllEmployee();
 }

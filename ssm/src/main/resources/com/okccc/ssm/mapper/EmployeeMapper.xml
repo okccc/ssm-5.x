@@ -5,4 +5,28 @@
 
 <!-- 映射文件负责写crud -->
 <mapper namespace="com.okccc.ssm.mapper.EmployeeMapper">
+    <!--
+        两个一致
+        1.mapper接口的全类名和映射文件的namespace保持一致
+        2.mapper接口的方法名和映射文件的sql语句的id保持一致
+
+        表中字段名和实体类中属性名不一致,如何处理映射关系？
+        1.在mybatis-config.xml添加全局设置,自动将下划线映射成驼峰,比如emp_id:empId、emp_name:empName
+        2.使用resultMap自定义映射关系(常用)
+        id: 处理主键字段和属性的映射关系
+        result: 处理普通字段和属性的映射关系
+        association: 处理多对一的映射关系,即实体类类型的属性
+        collection: 处理一对多的映射关系,即集合类型的属性,一对多和多对一都可以使用分步查询,可以延迟加载,减少内存消耗
+    -->
+
+    <!-- resultType设置结果类型,即查询数据要转换成的java类型,resultMap自定义映射,处理一对多或多对一的映射关系 -->
+    <resultMap id="employeeResultMap" type="Employee">
+        <id column="id" property="id"/>
+        <result column="emp_id" property="empId"/>
+        <result column="emp_name" property="empName"/>
+    </resultMap>
+    <!-- List<Employee> getAllEmployee(); -->
+    <select id="getAllEmployee" resultMap="employeeResultMap">
+        select * from t_employee
+    </select>
 </mapper>
