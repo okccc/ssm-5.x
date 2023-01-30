@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>employee list</title>
+    <!-- 引入css样式 -->
+    <link rel="stylesheet" th:href="@{/static/css/index_work.css}">
+    <!-- 引入js -->
+    <script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+</head>
+<body>
+<div id="app">
+    <table id="dataTable" style="text-align: center">
+        <tr>
+            <th colspan="6">员工列表</th>
+        </tr>
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>邮箱</th>
+            <!-- 添加员工的超链接 -->
+            <th>操作选项 (<a th:href="@{/to/add}">add</a> | <a th:href="@{/employee/count}">count</a>)</th>
+        </tr>
+        <tr th:each="employee : ${pageInfo.list}">
+            <td th:text="${employee.empId}"></td>
+            <td th:text="${employee.empName}"></td>
+            <td th:text="${employee.age}"></td>
+            <td th:text="${employee.gender}"></td>
+            <td th:text="${employee.email}"></td>
+            <td>
+                <!-- 修改员工的超链接 -->
+                <a th:href="@{'/employee/' + ${employee.empId}}">update</a> |
+                <!-- 删除员工的超链接,@click给vue绑定点击事件,对form表单进行操作 -->
+                <a th:href="@{'/employee/' + ${employee.empId}}" @click="deleteEmployee()">delete</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <span th:if="${pageInfo.hasPreviousPage}">
+                    <a th:href="@{/employee/page/1}">首页</a>
+                    <a th:href="@{'/employee/page/'+${pageInfo.prePage}}">上一页</a>
+                </span>
+                <span th:each="num : ${pageInfo.navigatepageNums}">
+                    <a th:if="${pageInfo.pageNum==num}" th:href="@{'/employee/page/'+${num}}" th:text="'['+${num}+']'" style="color:red;"></a>
+                    <a th:if="${pageInfo.pageNum!=num}" th:href="@{'/employee/page/'+${num}}" th:text="${num}"></a>
+                </span>
+                <span th:if="${pageInfo.hasNextPage}">
+                    <a th:href="@{'/employee/page/'+${pageInfo.nextPage}}">下一页</a>
+                    <a th:href="@{'/employee/page/'+${pageInfo.pages}}">末页</a>
+                </span>
+            </td>
+        </tr>
+    </table>
+
+    <form method="post">
+        <input type="hidden" name="_method" value="delete">
+    </form>
+</div>
+<!-- 通过vue处理点击事件 -->
+<script type="text/javascript">
+    var vue = new Vue({
+        el:"#app",
+        methods:{
+            deleteEmployee(){
+                // 获取form表单,当html页面只有一个form表单时,不用设置id直接根据标签名查找,取数组的第一个元素
+                var form = document.getElementsByTagName("form")[0];
+                // event.target表示当前触发事件的标签,将超链接的href属性值赋值给form表单的action属性
+                form.action = event.target.href;
+                // 表单提交
+                form.submit();
+                // 阻止超链接的默认行为
+                event.preventDefault();
+            }
+        }
+    });
+</script>
+</body>
+</html>

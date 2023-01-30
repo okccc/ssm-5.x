@@ -1,10 +1,12 @@
 package com.okccc.ssm.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.okccc.ssm.pojo.Employee;
 import com.okccc.ssm.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -59,5 +61,18 @@ public class EmployeeController {
         model.addAttribute("employeeList", employeeList);
         // 跳转到列表页面
         return "employee_list";
+    }
+
+    /**
+     * 查询员工分页
+     */
+    @RequestMapping(value = "/employee/page/{pageNum}", method = RequestMethod.GET)
+    public String getEmployeeByPage(@PathVariable("pageNum") Integer pageNum, Model model) {
+        // 查询员工分页信息
+        PageInfo<Employee> pageInfo = employeeService.getEmployeeByPage(pageNum);
+        // 将数据共享到请求域
+        model.addAttribute("pageInfo", pageInfo);
+        // 跳转到列表页面
+        return "employee_page";
     }
 }

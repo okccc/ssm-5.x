@@ -1,5 +1,6 @@
 package com.okccc.ssm.service;
 
+import com.github.pagehelper.PageInfo;
 import com.okccc.ssm.pojo.Employee;
 
 import java.util.List;
@@ -15,4 +16,9 @@ public interface EmployeeService {
      * 查询所有员工
      */
     List<Employee> getAllEmployee();
+
+    /**
+     * 查询员工分页
+     */
+    PageInfo<Employee> getEmployeeByPage(Integer pageNum);
 }
