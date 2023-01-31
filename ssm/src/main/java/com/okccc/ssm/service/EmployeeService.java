@@ -21,4 +21,9 @@ public interface EmployeeService {
      * 查询员工分页
      */
     PageInfo<Employee> getEmployeeByPage(Integer pageNum);
+
+    /**
+     * 添加员工
+     */
+    void insertEmployee(Employee employee);
 }

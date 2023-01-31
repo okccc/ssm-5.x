@@ -29,4 +29,10 @@
     <select id="getAllEmployee" resultMap="employeeResultMap">
         select * from t_employee
     </select>
+
+    <!-- useGeneratedKeys表示当前添加功能使用自增主键,keyProperty指定自增主键对应实体类的属性名,通常是id -->
+    <!-- void insertEmployee(Employee employee); -->
+    <insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id">
+        insert into t_employee values (null,#{empId},#{empName},#{age},#{gender},#{email})
+    </insert>
 </mapper>

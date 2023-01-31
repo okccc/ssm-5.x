@@ -62,4 +62,10 @@ public class EmployeeServiceImpl implements EmployeeService {
          */
         return pageInfo;
     }
+
+    @Override
+    public void insertEmployee(Employee employee) {
+        // 添加员工
+        employeeMapper.insertEmployee(employee);
+    }
 }

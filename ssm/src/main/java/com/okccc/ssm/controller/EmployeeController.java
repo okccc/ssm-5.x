@@ -75,4 +75,24 @@ public class EmployeeController {
         // 跳转到列表页面
         return "employee_page";
     }
+
+    /**
+     * 跳转到添加页面
+     */
+    @RequestMapping(value = "/to/add", method = RequestMethod.GET)
+    public String toAdd() {
+        // 跳转到添加页面,只用来实现页面跳转时可以使用视图控制器
+        return "employee_add";
+    }
+
+    /**
+     * 添加员工
+     */
+    @RequestMapping(value = "/employee", method = RequestMethod.POST)
+    public String addEmployee(Employee employee) {
+        // 添加员工信息
+        employeeService.insertEmployee(employee);
+        // 重定向到列表页
+        return "redirect:/employee";
+    }
 }
