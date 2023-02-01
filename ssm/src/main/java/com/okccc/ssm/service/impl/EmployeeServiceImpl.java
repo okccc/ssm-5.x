@@ -68,4 +68,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 添加员工
         employeeMapper.insertEmployee(employee);
     }
+
+    @Override
+    public Employee getEmployeeByEmpId(Integer empId) {
+        // 根据empId查询员工
+        return employeeMapper.getEmployeeByEmpId(empId);
+    }
+
+    @Override
+    public void updateEmployee(Employee employee) {
+        // 修改员工
+        employeeMapper.updateEmployee(employee);
+    }
 }

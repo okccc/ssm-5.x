@@ -1,6 +1,7 @@
 package com.okccc.ssm.mapper;
 
 import com.okccc.ssm.pojo.Employee;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,4 +29,14 @@ public interface EmployeeMapper {
      * 添加员工
      */
     void insertEmployee(Employee employee);
+
+    /**
+     * 根据empId查询员工
+     */
+    Employee getEmployeeByEmpId(@Param("empId") Integer empId);
+
+    /**
+     * 修改员工
+     */
+    void updateEmployee(Employee employee);
 }

@@ -95,4 +95,28 @@ public class EmployeeController {
         // 重定向到列表页
         return "redirect:/employee";
     }
+
+    /**
+     * 根据id查询员工,跳转到修改页面
+     */
+    @RequestMapping(value = "/employee/{empId}", method = RequestMethod.GET)
+    public String toUpdate(@PathVariable("empId") Integer empId, Model model) {
+        // 根据id查询员工
+        Employee employee = employeeService.getEmployeeByEmpId(empId);
+        // 将数据共享到请求域
+        model.addAttribute("employee", employee);
+        // 跳转到修改页面
+        return "employee_update";
+    }
+
+    /**
+     * 修改员工
+     */
+    @RequestMapping(value = "/employee", method = RequestMethod.PUT)
+    public String updateEmployee(Employee employee) {
+        // 更新员工信息
+        employeeService.updateEmployee(employee);
+        // 重定向到列表页
+        return "redirect:/employee";
+    }
 }

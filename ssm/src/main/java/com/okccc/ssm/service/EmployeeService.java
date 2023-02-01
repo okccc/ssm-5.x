@@ -26,4 +26,14 @@ public interface EmployeeService {
      * 添加员工
      */
     void insertEmployee(Employee employee);
+
+    /**
+     * 根据empId查询员工
+     */
+    Employee getEmployeeByEmpId(Integer empId);
+
+    /**
+     * 修改员工
+     */
+    void updateEmployee(Employee employee);
 }

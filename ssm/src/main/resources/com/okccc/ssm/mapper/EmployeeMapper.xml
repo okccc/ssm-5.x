@@ -30,9 +30,19 @@
         select * from t_employee
     </select>
 
+    <!-- Employee getEmployeeByEmpId(@Param("empId") Integer empId); -->
+    <select id="getEmployeeByEmpId" resultType="Employee">
+        select * from t_employee where emp_id = #{empId}
+    </select>
+
     <!-- useGeneratedKeys表示当前添加功能使用自增主键,keyProperty指定自增主键对应实体类的属性名,通常是id -->
     <!-- void insertEmployee(Employee employee); -->
     <insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id">
         insert into t_employee values (null,#{empId},#{empName},#{age},#{gender},#{email})
     </insert>
+
+    <!-- void updateEmployee(Employee employee); -->
+    <update id="updateEmployee">
+        update t_employee set emp_id=#{empId},emp_name=#{empName},age=#{age},gender=#{gender},email=#{email} where emp_id=#{empId}
+    </update>
 </mapper>
