@@ -39,4 +39,9 @@ public interface EmployeeMapper {
      * 修改员工
      */
     void updateEmployee(Employee employee);
+
+    /**
+     * 根据empId删除员工
+     */
+    void deleteEmployeeByEmpId(@Param("empId") Integer empId);
 }

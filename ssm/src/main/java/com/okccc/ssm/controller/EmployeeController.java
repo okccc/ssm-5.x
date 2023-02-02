@@ -119,4 +119,15 @@ public class EmployeeController {
         // 重定向到列表页
         return "redirect:/employee";
     }
+
+    /**
+     * 删除员工
+     */
+    @RequestMapping(value = "/employee/{empId}", method = RequestMethod.DELETE)
+    public String deleteEmployeeByEmpId(@PathVariable("empId") Integer empId) {
+        // 删除员工信息
+        employeeService.deleteEmployeeByEmpId(empId);
+        // 重定向到列表页
+        return "redirect:/employee";
+    }
 }

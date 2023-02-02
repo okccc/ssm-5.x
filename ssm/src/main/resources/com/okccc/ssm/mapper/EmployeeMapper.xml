@@ -45,4 +45,9 @@
     <update id="updateEmployee">
         update t_employee set emp_id=#{empId},emp_name=#{empName},age=#{age},gender=#{gender},email=#{email} where emp_id=#{empId}
     </update>
+
+    <!-- void deleteEmployeeByEmpId(@Param("empId") Integer empId); -->
+    <delete id="deleteEmployeeByEmpId">
+        delete from t_employee where emp_id = #{empId}
+    </delete>
 </mapper>

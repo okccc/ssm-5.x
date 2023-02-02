@@ -80,4 +80,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 修改员工
         employeeMapper.updateEmployee(employee);
     }
+
+    @Override
+    public void deleteEmployeeByEmpId(Integer empId) {
+        // 根据empId删除员工
+        employeeMapper.deleteEmployeeByEmpId(empId);
+    }
 }
