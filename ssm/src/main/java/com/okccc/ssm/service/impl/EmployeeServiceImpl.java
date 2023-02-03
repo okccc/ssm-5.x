@@ -86,4 +86,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 根据empId删除员工
         employeeMapper.deleteEmployeeByEmpId(empId);
     }
+
+    @Override
+    public int countEmployee() {
+        // 统计员工数量
+        return employeeMapper.countEmployee();
+    }
 }

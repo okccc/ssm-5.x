@@ -130,4 +130,17 @@ public class EmployeeController {
         // 重定向到列表页
         return "redirect:/employee";
     }
+
+    /**
+     * 统计员工数量
+     */
+    @RequestMapping(value = "/employee/count", method = RequestMethod.GET)
+    public String countEmployee(Model model) {
+        // 统计员工数量
+        int count = employeeService.countEmployee();
+        // 将数据共享到请求域
+        model.addAttribute("count", count);
+        // 跳转到统计页面
+        return "employee_count";
+    }
 }

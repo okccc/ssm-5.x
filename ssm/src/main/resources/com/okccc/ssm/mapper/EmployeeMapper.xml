@@ -50,4 +50,10 @@
     <delete id="deleteEmployeeByEmpId">
         delete from t_employee where emp_id = #{empId}
     </delete>
+
+    <!-- MyBatis为java常用类型设置了类型别名 Integer: int、Integer | int: _int、_integer | Map: map | String: string -->
+    <!-- int countEmployee(); -->
+    <select id="countEmployee" resultType="int">
+        select count(*) from t_employee
+    </select>
 </mapper>

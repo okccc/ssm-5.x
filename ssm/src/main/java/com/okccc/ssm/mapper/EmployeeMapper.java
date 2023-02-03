@@ -44,4 +44,9 @@ public interface EmployeeMapper {
      * 根据empId删除员工
      */
     void deleteEmployeeByEmpId(@Param("empId") Integer empId);
+
+    /**
+     * 统计员工数量
+     */
+    int countEmployee();
 }

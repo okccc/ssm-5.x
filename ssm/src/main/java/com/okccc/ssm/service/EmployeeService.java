@@ -41,4 +41,9 @@ public interface EmployeeService {
      * 根据empId删除员工
      */
     void deleteEmployeeByEmpId(Integer empId);
+
+    /**
+     * 统计数量
+     */
+    int countEmployee();
 }
