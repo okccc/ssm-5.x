@@ -6,9 +6,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
- * Author: okccc
- * Date: 2022/11/7 4:57 下午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/11/7 4:57 下午
+ * @Desc:
  */
 @Repository
 public class BookDaoImpl implements BookDao {

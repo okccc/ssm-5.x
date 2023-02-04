@@ -4,9 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Author: okccc
- * Date: 2022/11/24 2:04 下午
- * Desc: SpringMVC视图
+ * @Author: okccc
+ * @Date: 2022/11/24 2:04 下午
+ * @Desc: SpringMVC视图
  *
  * SpringMVC中的视图是View接口,用来渲染数据,将Model模型中的数据展示给用户
  * 转发视图和重定向视图都可以实现页面跳转,一般业务逻辑处理失败用转发,处理成功用重定向

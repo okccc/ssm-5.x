@@ -3,9 +3,9 @@ package com.okccc.mybatis.pojo;
 import java.util.List;
 
 /**
- * Author: okccc
- * Date: 2022/10/6 9:40 上午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/10/6 9:40 上午
+ * @Desc:
  */
 public class Dept {
 

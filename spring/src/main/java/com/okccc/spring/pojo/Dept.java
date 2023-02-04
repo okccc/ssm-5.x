@@ -3,9 +3,9 @@ package com.okccc.spring.pojo;
 import java.util.List;
 
 /**
- * Author: okccc
- * Date: 2022/10/23 11:46 上午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/10/23 11:46 上午
+ * @Desc:
  */
 public class Dept {
 

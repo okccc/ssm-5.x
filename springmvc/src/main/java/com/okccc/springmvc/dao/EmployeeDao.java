@@ -5,9 +5,9 @@ import com.okccc.springmvc.pojo.Employee;
 import java.util.Collection;
 
 /**
- * Author: okccc
- * Date: 2022/11/28 3:40 下午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/11/28 3:40 下午
+ * @Desc:
  */
 public interface EmployeeDao {
 

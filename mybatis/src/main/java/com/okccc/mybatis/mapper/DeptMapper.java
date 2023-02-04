@@ -4,9 +4,9 @@ import com.okccc.mybatis.pojo.Dept;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * Author: okccc
- * Date: 2022/10/7 10:01 上午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/10/7 10:01 上午
+ * @Desc:
  */
 public interface DeptMapper {
 

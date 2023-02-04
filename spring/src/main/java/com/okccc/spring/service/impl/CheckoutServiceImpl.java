@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Author: okccc
- * Date: 2022/11/7 6:25 下午
- * Desc: 事务属性之传播行为
+ * @Author: okccc
+ * @Date: 2022/11/7 6:25 下午
+ * @Desc: 事务属性之传播行为
  */
 @Service
 public class CheckoutServiceImpl implements CheckoutService {

@@ -4,9 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Author: okccc
- * Date: 2022/11/25 6:44 下午
- * Desc: RestFul风格
+ * @Author: okccc
+ * @Date: 2022/11/25 6:44 下午
+ * @Desc: RestFul风格
  *
  * 1.REST(Representational State Transfer)：表述层资源状态转移
  * 资源：服务器上一切皆资源,使用URI标识,URI既是资源名称也是资源在web上的地址,客户端通过URI与资源进行交互

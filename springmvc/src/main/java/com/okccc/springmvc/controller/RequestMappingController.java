@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Author: okccc
- * Date: 2022/11/9 3:18 下午
- * Desc: @RequestMapping注解
+ * @Author: okccc
+ * @Date: 2022/11/9 3:18 下午
+ * @Desc: @RequestMapping注解
  * 
  * 请求映射：将浏览器发送的请求路径映射到当前控制器方法执行,标识在类上设置初始信息,标识在方法上设置具体信息
  * 1.value属性：通过请求路径匹配(常用)

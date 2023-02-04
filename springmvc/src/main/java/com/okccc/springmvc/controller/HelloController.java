@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Author: okccc
- * Date: 2022/11/23 5:02 下午
- * Desc: 控制器DispatcherServlet会统一处理浏览器请求,但不同请求处理过程也不同,所以需要处理具体请求的控制器,包含若干控制器方法
+ * @Author: okccc
+ * @Date: 2022/11/23 5:02 下午
+ * @Desc: 控制器DispatcherServlet会统一处理浏览器请求,但不同请求处理过程也不同,所以需要处理具体请求的控制器,包含若干控制器方法
  *
  * MVC是一种软件架构思想
  * Model(模型层)：JavaBean,包括存储业务数据的User、Order等实体类以及处理业务逻辑的Service、Dao等对象

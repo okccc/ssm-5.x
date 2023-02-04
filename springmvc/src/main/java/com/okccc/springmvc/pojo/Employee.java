@@ -1,9 +1,9 @@
 package com.okccc.springmvc.pojo;
 
 /**
- * Author: okccc
- * Date: 2022/11/28 3:25 下午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/11/28 3:25 下午
+ * @Desc:
  */
 public class Employee {
 

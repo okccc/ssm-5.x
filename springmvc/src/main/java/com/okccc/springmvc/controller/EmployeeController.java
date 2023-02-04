@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Collection;
 
 /**
- * Author: okccc
- * Date: 2022/11/28 4:09 下午
- * Desc: 使用Restful风格结合ModelAndView实现CRUD
+ * @Author: okccc
+ * @Date: 2022/11/28 4:09 下午
+ * @Desc: 使用Restful风格结合ModelAndView实现CRUD
  *
  * 查询所有员工 -> /employee  GET
  * 跳转到添加页面 -> /to/add  GET

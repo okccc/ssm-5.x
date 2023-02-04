@@ -26,9 +26,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 /**
- * Author: okccc
- * Date: 2022/10/15 12:27 下午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/10/15 12:27 下午
+ * @Desc:
  */
 // Spring整合Junit4,表示当前类是在spring测试环境执行,这样就可以通过注入方式直接获取IOC容器的bean
 @RunWith(SpringJUnit4ClassRunner.class)

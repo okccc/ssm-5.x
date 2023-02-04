@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 /**
- * Author: okccc
- * Date: 2022/11/3 2:46 下午
- * Desc: 基于xml的AOP(了解)
+ * @Author: okccc
+ * @Date: 2022/11/3 2:46 下午
+ * @Desc: 基于xml的AOP(了解)
  */
 @Component
 public class LoggerAspectByXml {

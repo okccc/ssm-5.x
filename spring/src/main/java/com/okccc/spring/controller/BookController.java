@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 /**
- * Author: okccc
- * Date: 2022/11/7 6:06 下午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/11/7 6:06 下午
+ * @Desc:
  */
 @Controller
 public class BookController {

@@ -1,9 +1,9 @@
 package com.okccc.spring.aop;
 
 /**
- * Author: okccc
- * Date: 2022/10/27 10:53 上午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/10/27 10:53 上午
+ * @Desc:
  */
 public interface Calculator {
 

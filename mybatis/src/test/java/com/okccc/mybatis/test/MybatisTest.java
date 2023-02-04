@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Author: okccc
- * Date: 2022/10/3 11:22 上午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/10/3 11:22 上午
+ * @Desc:
  */
 public class MybatisTest {
 

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Author: okccc
- * Date: 2022/11/23 4:59 下午
- * Desc: SpringMVC获取请求参数的方式
+ * @Author: okccc
+ * @Date: 2022/11/23 4:59 下午
+ * @Desc: SpringMVC获取请求参数的方式
  *
  * 1.通过ServletAPI获取(很少用,过于原始)
  * 往控制器方法传入HttpServletRequest对象获取请求参数

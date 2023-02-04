@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Author: okccc
- * Date: 2022/9/28 4:03 下午
- * Desc: mapper接口
+ * @Author: okccc
+ * @Date: 2022/9/28 4:03 下午
+ * @Desc: mapper接口
  *
  * idea设置mybatis核心配置文件和映射文件模板
  * Intellij IDEA - Preferences - Editor - File and Code Templates - Files - mybatis-config/mybatis-mapper

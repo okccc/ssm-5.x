@@ -6,9 +6,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * Author: okccc
- * Date: 2022/10/7 10:01 上午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/10/7 10:01 上午
+ * @Desc:
  */
 public interface EmpMapper {
 

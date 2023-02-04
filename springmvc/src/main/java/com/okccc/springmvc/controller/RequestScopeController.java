@@ -12,9 +12,9 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
- * Author: okccc
- * Date: 2022/11/24 1:45 下午
- * Desc: 向请求域共享数据的方式
+ * @Author: okccc
+ * @Date: 2022/11/24 1:45 下午
+ * @Desc: 向请求域共享数据的方式
  *
  * 1.使用ServletAPI向请求域共享数据(很少用,过于原始)
  *

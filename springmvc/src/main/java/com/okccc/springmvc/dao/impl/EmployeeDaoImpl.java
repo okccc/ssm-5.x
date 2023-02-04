@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Author: okccc
- * Date: 2022/11/28 3:39 下午
- * Desc: 使用Map集合简单模拟EmployeeDao,真实场景应该是JdbcTemplate操作数据库
+ * @Author: okccc
+ * @Date: 2022/11/28 3:39 下午
+ * @Desc: 使用Map集合简单模拟EmployeeDao,真实场景应该是JdbcTemplate操作数据库
  */
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {

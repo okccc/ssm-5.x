@@ -3,9 +3,9 @@ package com.okccc.mybatis.pojo;
 import java.io.Serializable;
 
 /**
- * Author: okccc
- * Date: 2022/9/28 4:01 下午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/9/28 4:01 下午
+ * @Desc:
  */
 public class User implements Serializable {
 

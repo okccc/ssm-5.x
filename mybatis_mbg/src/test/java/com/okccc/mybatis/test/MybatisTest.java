@@ -12,9 +12,9 @@ import org.junit.Test;
 import java.util.List;
 
 /**
- * Author: okccc
- * Date: 2022/10/14 2:48 下午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/10/14 2:48 下午
+ * @Desc:
  */
 public class MybatisTest {
 

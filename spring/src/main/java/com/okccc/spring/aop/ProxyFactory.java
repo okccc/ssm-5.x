@@ -6,9 +6,9 @@ import java.lang.reflect.Proxy;
 import java.util.Arrays;
 
 /**
- * Author: okccc
- * Date: 2022/10/27 1:59 下午
- * Desc: 生产代理对象的工厂类,可以动态生成任意目标类的代理类
+ * @Author: okccc
+ * @Date: 2022/10/27 1:59 下午
+ * @Desc: 生产代理对象的工厂类,可以动态生成任意目标类的代理类
  * 动态代理有两种
  * 1.jdk动态代理(常用)：要求必须有接口,最终生成的代理类和目标类实现相同的接口,在com.sun.proxy包下
  * 2.cglib动态代理：最终生成的代理类会继承目标类,并且和目标类在相同包下

@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 /**
- * Author: okccc
- * Date: 2022/11/3 2:46 下午
- * Desc: 基于注解的AOP(推荐)
+ * @Author: okccc
+ * @Date: 2022/11/3 2:46 下午
+ * @Desc: 基于注解的AOP(推荐)
  */
 @Component  // 表示这是一个普通类,是实现IOC功能的注解
 @Aspect  // 表示这是一个切面类,是实现AOP功能的注解

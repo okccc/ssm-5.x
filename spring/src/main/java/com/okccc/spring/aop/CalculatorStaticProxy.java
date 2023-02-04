@@ -1,9 +1,9 @@
 package com.okccc.spring.aop;
 
 /**
- * Author: okccc
- * Date: 2022/10/27 11:38 上午
- * Desc: 静态代理实现了解耦但是代理对象被写死了,如果其它目标类想附加日志还得声明更多静态代理类,所以需要动态代理
+ * @Author: okccc
+ * @Date: 2022/10/27 11:38 上午
+ * @Desc: 静态代理实现了解耦但是代理对象被写死了,如果其它目标类想附加日志还得声明更多静态代理类,所以需要动态代理
  */
 public class CalculatorStaticProxy implements Calculator {
 

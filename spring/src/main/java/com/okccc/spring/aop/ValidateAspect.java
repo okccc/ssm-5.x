@@ -7,9 +7,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * Author: okccc
- * Date: 2022/11/4 6:10 下午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/11/4 6:10 下午
+ * @Desc:
  */
 
 @Component

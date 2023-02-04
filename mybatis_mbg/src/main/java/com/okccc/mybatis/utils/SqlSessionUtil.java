@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Author: okccc
- * Date: 2022/10/14 2:49 下午
- * Desc: SqlSession工具类
+ * @Author: okccc
+ * @Date: 2022/10/14 2:49 下午
+ * @Desc: SqlSession工具类
  */
 public class SqlSessionUtil {
 

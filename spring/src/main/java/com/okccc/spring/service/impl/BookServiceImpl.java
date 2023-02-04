@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Author: okccc
- * Date: 2022/11/7 6:04 下午
- * Desc: 事务属性之只读、超时、回滚策略、隔离级别、传播行为
+ * @Author: okccc
+ * @Date: 2022/11/7 6:04 下午
+ * @Desc: 事务属性之只读、超时、回滚策略、隔离级别、传播行为
  */
 @Service
 public class BookServiceImpl implements BookService {

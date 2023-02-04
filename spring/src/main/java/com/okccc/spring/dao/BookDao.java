@@ -1,9 +1,9 @@
 package com.okccc.spring.dao;
 
 /**
- * Author: okccc
- * Date: 2022/11/7 4:55 下午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/11/7 4:55 下午
+ * @Desc:
  */
 public interface BookDao {
 

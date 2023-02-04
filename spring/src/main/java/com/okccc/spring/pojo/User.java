@@ -1,9 +1,9 @@
 package com.okccc.spring.pojo;
 
 /**
- * Author: okccc
- * Date: 2022/10/24 6:16 下午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/10/24 6:16 下午
+ * @Desc:
  */
 public class User {
 

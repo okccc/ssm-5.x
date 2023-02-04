@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 /**
- * Author: okccc
- * Date: 2022/10/25 3:01 下午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/10/25 3:01 下午
+ * @Desc:
  */
 @Controller
 public class UserController {

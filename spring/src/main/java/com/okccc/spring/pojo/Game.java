@@ -1,9 +1,9 @@
 package com.okccc.spring.pojo;
 
 /**
- * Author: okccc
- * Date: 2022/10/23 1:34 下午
- * Desc:
+ * @Author: okccc
+ * @Date: 2022/10/23 1:34 下午
+ * @Desc:
  */
 public class Game {
 
